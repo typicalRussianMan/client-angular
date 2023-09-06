@@ -1,0 +1,3 @@
+name: Angular Deploy gh-pages Actions
+
+uses: AhsanAyaz/angular-deploy-gh-pages-actions@v1.4.0
