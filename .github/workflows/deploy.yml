@@ -15,7 +15,7 @@ jobs:
 
     - name: Install and build
       run: |
-        npm i
+        npm ci --legacy-peer-deps
         npx ng build --configuration production --base-href https://typicalRussianMan.github.io/client-angular/
 
     - name: Deploy
