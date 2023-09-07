@@ -1,0 +1,24 @@
+name: Deploy Application
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install nodejs
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.13.0
+
+    - name: Install and build
+      run: |
+        npm ci
+        npx ng build --configuration production --base-href https://typicalRussianMan.github.io/client-angular/
+
+    - name: Deploy
+      uses: rossjrw/pr-preview-action@v1
+      with:
+        source-dir: dist/client-angular
