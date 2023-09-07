@@ -3,20 +3,34 @@ name: Deploy Application
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
     - name: Install nodejs
       uses: actions/setup-node@v3
       with:
         node-version: 18.13.0
 
-    - name: Install and build
+    - name: Install dependencies
       run: |
-        npm ci --legacy-peer-deps
-        npx ng build --configuration production --base-href https://typicalRussianMan.github.io/client-angular/
+        if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+        elif [ -e package-lock.json ]; then
+          npm ci
+        else
+          npm i
+        fi
+
+    - name: Build
+      run: npx ng build --configuration production --base-href https://typicalRussianMan.github.io/client-angular/
 
     - name: Deploy
       uses: rossjrw/pr-preview-action@v1
