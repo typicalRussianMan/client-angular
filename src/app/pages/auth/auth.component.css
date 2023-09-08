@@ -1,0 +1,15 @@
+:host {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-container {
+  width: 30%;
+}
+
+.title {
+  font-size: var(--font-size-l);
+  margin-bottom: 10px;
+}
