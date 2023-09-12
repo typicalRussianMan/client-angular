@@ -23,8 +23,6 @@ export class AuthComponent {
 
   public constructor(
     private readonly fb: NonNullableFormBuilder,
-    private readonly userService: UserService,
-    private readonly firebaseService: AuthService
   ) {}
 
   public onSubmit(form: FormGroup): void {
@@ -33,12 +31,5 @@ export class AuthComponent {
     if (form.invalid) {
       return;
     }
-
-    this.userService.logIn(new Login(form.getRawValue())).pipe(
-      tap(cred => {
-        console.log(cred);
-      }),
-      first(),
-    ).subscribe();
   }
 }

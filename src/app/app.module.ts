@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './pages/auth/auth.module';
 import { AdminModule } from './pages/admin/admin.module';
+import { CoreModule } from './core.module';
+
 
 
 @NgModule({
@@ -22,8 +24,11 @@ import { AdminModule } from './pages/admin/admin.module';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    AuthModule,
+    CoreModule,
     AdminModule,
+    AuthModule,
+  ],
+  exports: [
   ],
   bootstrap: [AppComponent]
 })

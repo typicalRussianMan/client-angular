@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AdminComponent {
 
+  protected user$ = this.userService.currentUser$
+
+  public constructor(
+    private readonly userService: UserService,
+  ) {}
 }

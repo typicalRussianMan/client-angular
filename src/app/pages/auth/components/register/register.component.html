@@ -1,1 +1,33 @@
-<p>register works!</p>
+<mat-card-header>
+  <mat-card-title class="title">
+    Registration
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+      />
+      <mat-error *ngIf="hasError('email')">
+        {{ getError('email') }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+      />
+      <mat-error *ngIf="hasError('password')">
+        {{ getError('password') }}
+      </mat-error>
+    </mat-form-field>
+    <div class="actions">
+      <button color="primary" mat-raised-button type="submit">Registration</button>
+      <a routerLink="../login">Log in page</a>
+    </div>
+  </form>
+</mat-card-content>

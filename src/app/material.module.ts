@@ -23,7 +23,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 const modules = [
   MatIconModule,
@@ -52,6 +53,7 @@ const modules = [
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
+  MatSnackBarModule,
 ];
 
 /**

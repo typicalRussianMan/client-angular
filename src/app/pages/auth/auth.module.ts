@@ -6,6 +6,8 @@ import { AuthComponent } from './auth.component';
 import { MaterialModule } from 'src/app/material.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CoreModule } from 'src/app/core.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { RegisterComponent } from './components/register/register.component';
     RegisterComponent
   ],
   imports: [
+    CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
+    CoreModule,
   ],
   exports: [AuthComponent]
 })
