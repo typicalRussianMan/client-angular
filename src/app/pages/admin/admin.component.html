@@ -1,0 +1,5 @@
+<p *ngIf="user$ | async as user; else noUser">Hi, user! You email: {{ user.user.email }}</p>
+
+<ng-template #noUser>
+  Hi, anonymous user!
+</ng-template>
