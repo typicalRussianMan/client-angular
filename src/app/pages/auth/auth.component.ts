@@ -2,9 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Login } from 'src/app/core/models/login/login';
 import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
-import { UserService } from '../../services/user.service';
-import { first, tap } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
 
 type AuthFormControls = FlatControlsOf<Login>;
 

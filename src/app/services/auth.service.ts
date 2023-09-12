@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from 'firebase/auth'
-import { Login } from "src/app/core/models/login/login";
-import { FirebaseService } from "./firebase.service";
+import { Login } from 'src/app/core/models/login/login';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

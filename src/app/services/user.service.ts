@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { AuthService } from "./auth.service";
-import { Login } from "src/app/core/models/login/login";
-import { BehaviorSubject, Observable } from "rxjs";
-import { UserCredential } from "firebase/auth";
-import { fromPromise } from "../core/utils/rxjs/from-promise";
-import { Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Login } from 'src/app/core/models/login/login';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UserCredential } from 'firebase/auth';
+import { fromPromise } from '../core/utils/rxjs/from-promise';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

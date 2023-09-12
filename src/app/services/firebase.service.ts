@@ -1,8 +1,8 @@
-import { Injectable, inject } from "@angular/core";
-import { FirebaseApp, initializeApp } from "firebase/app";
-import { Firestore, getFirestore } from "firebase/firestore";
-import { Auth, getAuth } from "firebase/auth";
-import { AppConfigService } from "./app-config.service";
+import { Injectable, inject } from '@angular/core';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { Firestore, getFirestore } from 'firebase/firestore';
+import { Auth, getAuth } from 'firebase/auth';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class FirebaseService {
