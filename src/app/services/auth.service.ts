@@ -10,6 +10,10 @@ export class AuthService {
     private readonly firebaseService: FirebaseService,
   ) {}
 
+  /**
+   * Registers user.
+   * @param login Login data.
+   */
   public async register(login: Login): Promise<UserCredential> {
     return createUserWithEmailAndPassword(
       this.firebaseService.auth,
@@ -18,6 +22,10 @@ export class AuthService {
     )
   }
 
+  /**
+   * Logins user.
+   * @param login Login data.
+   */
   public async singIn(login: Login): Promise<UserCredential> {
     return signInWithEmailAndPassword(
       this.firebaseService.auth,

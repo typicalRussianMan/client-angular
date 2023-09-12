@@ -19,7 +19,7 @@ type RegisterFormControls = FlatControlsOf<Login>;
 })
 export class RegisterComponent {
 
-  public readonly form = this.fb.group<RegisterFormControls>({
+  protected readonly form = this.fb.group<RegisterFormControls>({
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', Validators.required),
   });
@@ -32,11 +32,19 @@ export class RegisterComponent {
     private readonly router: Router
   ) {}
 
-  public hasError(field: keyof RegisterFormControls): boolean {
+  /**
+   * Checks if form control has error.
+   * @param field Form field key.
+   */
+  protected hasError(field: keyof RegisterFormControls): boolean {
     return this.form.controls[field].invalid
   }
 
-  public getError(field: keyof RegisterFormControls): string | null {
+  /**
+   * Extracts error from form.
+   * @param field Form field key.
+   */
+  protected getError(field: keyof RegisterFormControls): string | null {
     const { errors } = this.form.controls[field];
 
     const error = Object.keys(errors ?? {})[0];
@@ -44,7 +52,11 @@ export class RegisterComponent {
     return this.errorMapper.mapErrorToMessage(error as ValidationErrorCode)()
   }
 
-  public onSubmit(form: FormGroup): void {
+  /**
+   * Handles form submit.
+   * @param form Form.
+   */
+  protected onSubmit(form: FormGroup): void {
     form.markAsTouched();
 
     if (form.invalid) {

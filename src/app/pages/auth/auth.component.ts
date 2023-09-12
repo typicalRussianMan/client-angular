@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Login } from 'src/app/core/models/login/login';
-import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
 
-type AuthFormControls = FlatControlsOf<Login>;
-
+/** Auth page. */
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -12,21 +8,4 @@ type AuthFormControls = FlatControlsOf<Login>;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthComponent {
-
-  public readonly form = this.fb.group<AuthFormControls>({
-    email: this.fb.control('', [Validators.required, Validators.email]),
-    password: this.fb.control('', Validators.required),
-  });
-
-  public constructor(
-    private readonly fb: NonNullableFormBuilder,
-  ) {}
-
-  public onSubmit(form: FormGroup): void {
-    form.markAsTouched();
-
-    if (form.invalid) {
-      return;
-    }
-  }
 }

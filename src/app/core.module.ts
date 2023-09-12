@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-
 const declarations: any[] = [
 ]
 /**

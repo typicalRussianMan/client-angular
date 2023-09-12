@@ -11,8 +11,6 @@ import { AuthModule } from './pages/auth/auth.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { CoreModule } from './core.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

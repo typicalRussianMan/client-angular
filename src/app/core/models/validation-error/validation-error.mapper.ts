@@ -13,6 +13,7 @@ const MAP_ERROR_CODE_TO_MESSAGE: Readonly<Record<ValidationErrorCode, (...args: 
   [ValidationErrorCode.Required]: () => 'This field is required',
 }
 
+/** Validation error mapper. */
 @Injectable({ providedIn: 'root' })
 export class ValidationErrorMapper {
 

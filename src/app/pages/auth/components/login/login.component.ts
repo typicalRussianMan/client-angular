@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 
 type AuthFormControls = FlatControlsOf<Login>;
 
+/** Login component. */
 @Destroyable()
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ type AuthFormControls = FlatControlsOf<Login>;
 })
 export class LoginComponent {
 
-  public readonly form = this.fb.group<AuthFormControls>({
+  protected readonly form = this.fb.group<AuthFormControls>({
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', Validators.required),
   });
@@ -32,11 +33,19 @@ export class LoginComponent {
     private readonly router: Router,
   ) {}
 
-  public hasError(field: keyof AuthFormControls): boolean {
+  /**
+   * Checks if form control has error.
+   * @param field Form field key.
+   */
+  protected hasError(field: keyof AuthFormControls): boolean {
     return this.form.controls[field].invalid
   }
 
-  public getError(field: keyof AuthFormControls): string | null {
+  /**
+   * Extracts error from form.
+   * @param field Form field key.
+   */
+  protected getError(field: keyof AuthFormControls): string | null {
     const { errors } = this.form.controls[field];
 
     const error = Object.keys(errors ?? {})[0];
@@ -44,7 +53,11 @@ export class LoginComponent {
     return this.errorMapper.mapErrorToMessage(error as ValidationErrorCode)()
   }
 
-  public onSubmit(form: FormGroup): void {
+  /**
+   * Handles form submit.
+   * @param form Form.
+   */
+  protected onSubmit(form: FormGroup): void {
     form.markAsTouched();
 
     if (form.invalid) {

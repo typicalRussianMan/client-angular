@@ -10,6 +10,7 @@ export class AuthGuard {
     private readonly userService: UserService,
   ) {}
 
+  /** Checks if user is authorized. */
   public canActivate(): Observable<boolean> {
     return this.userService.currentUser$.pipe(
       map(user => {
