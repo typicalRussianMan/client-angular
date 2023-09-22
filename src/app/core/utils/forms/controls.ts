@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormArray, FormControl, FormGroup, AbstractControl } from '@angular/forms';
 
 type NonUndefined<T> = T extends undefined ? never : T;
