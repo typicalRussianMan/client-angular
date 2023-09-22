@@ -14,8 +14,7 @@
   margin-bottom: 10px;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
+.submit-button {
+  width: 100%;
 }
 
