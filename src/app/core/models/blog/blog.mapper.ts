@@ -19,6 +19,7 @@ export class BlogMapper implements IMapper<BlogDto, Blog> {
     });
   }
 
+  /** @inheritdoc */
   public toDto(model: Blog): BlogDto {
     return {
       authorName: model.authorName,

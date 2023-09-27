@@ -3,8 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { ValidationErrorMapper } from 'src/app/core/models/validation-error/validation-error.mapper';
 import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
 
+/** Abstract form component. */
 export abstract class AbstractFormComponent<T extends object> {
 
+  /** Form group. */
   protected abstract form: FormGroup<FlatControlsOf<T>>;
 
   private readonly errorMapper = inject(ValidationErrorMapper);
