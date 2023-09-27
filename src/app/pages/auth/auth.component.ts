@@ -29,10 +29,16 @@ export class AuthComponent extends AbstractFormComponent<Login> {
   public constructor(
     private readonly fb: NonNullableFormBuilder,
     private readonly userService: UserService,
-    private readonly notificationService: NotificationService,
     private readonly router: Router,
   ) {
     super();
+  }
+
+  protected insertCredentials(): void {
+    this.form.patchValue({
+      email: 'qwe123qwe@mail.ru',
+      password: 'Q-we123qwe',
+    })
   }
 
   /**
@@ -47,13 +53,11 @@ export class AuthComponent extends AbstractFormComponent<Login> {
     }
 
     this.userService.signIn(new Login(form.getRawValue())).pipe(
-      tap(user => {
-        this.userService.currentUser$.next(null);
-        this.router.navigate(['/'])
-      }),
-      catchError(e => {
-        this.notificationService.showMessage(e.message)
-        return of();
+      tap(isAuthorized => {
+        if (isAuthorized) {
+          this.router.navigate(['/']);
+          this.userService.isAuthorized$.next(true);
+        }
       }),
       takeUntilDestroy(this),
     ).subscribe();

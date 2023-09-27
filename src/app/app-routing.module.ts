@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './pages/auth/auth.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
+import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,16 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'blogs',
+        component: BlogsComponent,
+      },
+      {
+        path: '**',
+        redirectTo: 'blogs',
+      }
+    ]
   },
   {
     path: '**',

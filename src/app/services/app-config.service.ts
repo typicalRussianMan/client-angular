@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class AppConfigService {
 
-  public readonly apiUrl = 'https://prime-peaceful-buck.ngrok-free.app/';
+  public readonly apiUrl = 'https://prime-peaceful-buck.ngrok-free.app/api/';
 }

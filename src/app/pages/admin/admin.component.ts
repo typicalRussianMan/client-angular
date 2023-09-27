@@ -1,17 +1,24 @@
-import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Blog } from 'src/app/core/models/blog/blog';
+import { BlogService } from 'src/app/services/blog.service';
 
 /** Admin page component. */
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminComponent {
 
-  protected user$ = this.userService.currentUser$
+  protected readonly blogs$: Observable<readonly Blog[]>;
+
+  protected readonly selectedBlog$ = new BehaviorSubject<Blog | null>(null);
 
   public constructor(
-    private readonly userService: UserService,
-  ) {}
+    private readonly blogService: BlogService,
+  ) {
+    this.blogs$ = blogService.getBlogs();
+  }
 }

@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { AppError } from '../core/models/app-error/app-error';
 
 const DEFAULT_HIDE_DELAY = 5000;
 
@@ -15,5 +16,9 @@ export class NotificationService {
    */
   public showMessage(message: string): void {
     this.snackBar.open(message, 'Hide', { duration: DEFAULT_HIDE_DELAY });
+  }
+
+  public showAppError(error: AppError): void {
+    this.showMessage(error.message);
   }
 }
