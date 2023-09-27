@@ -1,0 +1,22 @@
+<h1 class="page-title">Blogs</h1>
+
+<ng-container *ngIf="blogs$ | async as blogs">
+
+  <div
+    class="blog-container"
+    *ngIf="blogs.length > 0">
+
+    <div
+      class="blog"
+      *ngFor="let blog of blogs; trackBy: trackByBlog">
+
+      <h3 class="blog__title">{{ blog.title }}</h3>
+      <div class="blog__info">
+        Created by {{ blog.authorName }} at {{ formatDateTime(blog.createdAt) }}
+      </div>
+      <div class="blog__content">{{ blog.content }}</div>
+    </div>
+
+  </div>
+
+</ng-container>

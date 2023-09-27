@@ -5,15 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './pages/auth/auth.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { CoreModule } from './core.module';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    BlogsComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,13 @@ import { CoreModule } from './core.module';
     CoreModule,
     AdminModule,
     AuthModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   exports: [
   ],

@@ -10,9 +10,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --font-size-l: 2rem;
   --font-size-xl: 3rem;
 
-  --container-shadow: 10px 0 0 #0006
+  --container-shadow: 10px 0 0 #0006;
+
+  --bg-primary: rgb(236, 236, 236);
+}
+
+.page-title {
+  font-size: var(--font-size-xl);
+  margin-left: 20px;
 }
 
 .full-width {
   width: 100%;
+}
+
+.mat-menu-link {
+  background-color: transparent;
+  color: #fff;
 }

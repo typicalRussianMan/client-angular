@@ -1,9 +1,0 @@
-.title {
-  font-size: var(--font-size-l);
-  margin-bottom: 10px;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-}

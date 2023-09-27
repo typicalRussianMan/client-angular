@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, first, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 
@@ -12,15 +12,14 @@ export class AuthGuard {
 
   /** Checks if user is authorized. */
   public canActivate(): Observable<boolean> {
-    return this.userService.currentUser$.pipe(
-      map(user => {
-        const canActivate = user !== null;
+    return this.userService.isAuthorized$.pipe(
+      map(isAuthorized => {
 
-        if (!canActivate) {
+        if (!isAuthorized) {
           this.userService.requireLogin();
         }
 
-        return canActivate;
+        return isAuthorized;
       } ),
     )
   }

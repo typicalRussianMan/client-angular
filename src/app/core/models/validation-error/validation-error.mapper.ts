@@ -21,7 +21,15 @@ export class ValidationErrorMapper {
    * Maps error code to error message.
    * @param errorCode
    */
-  public mapErrorToMessage(errorCode: ValidationErrorCode): (...args: any) => string {
-    return MAP_ERROR_CODE_TO_MESSAGE[errorCode] ?? (() => 'Unknown error');
+  public mapErrorToMessage(errorCode: any): (...args: any) => string {
+    if (this.isValidationErrorCode(errorCode)) {
+      return MAP_ERROR_CODE_TO_MESSAGE[errorCode];
+    }
+
+    return () => 'This field has an error';
+  }
+
+  private isValidationErrorCode(value: any): value is ValidationErrorCode {
+    return Object.keys(MAP_ERROR_CODE_TO_MESSAGE).includes(value);
   }
 }

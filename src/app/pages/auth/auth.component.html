@@ -1,3 +1,37 @@
 <mat-card class="auth-container">
-  <router-outlet></router-outlet>
+
+  <mat-card-header>
+    <mat-card-title class="title">
+      Log In
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+        />
+        <mat-error *ngIf="hasError('email')">
+          {{ getError('email') }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+        />
+        <mat-error *ngIf="hasError('password')">
+          {{ getError('password') }}
+        </mat-error>
+      </mat-form-field>
+      <button class="submit-button" color="primary" mat-raised-button type="button" (click)="insertCredentials()">Insert credentials</button>
+      <button class="submit-button" color="primary" mat-raised-button type="submit">Log In</button>
+    </form>
+  </mat-card-content>
+
+
 </mat-card>

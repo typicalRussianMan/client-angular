@@ -1,17 +1,11 @@
-import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 /** Admin page component. */
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminComponent {
-
-  protected user$ = this.userService.currentUser$
-
-  public constructor(
-    private readonly userService: UserService,
-  ) {}
 }
