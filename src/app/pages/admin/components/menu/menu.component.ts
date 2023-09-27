@@ -9,6 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MenuComponent {
 
+  protected readonly user$ = this.userService.currentUser$;
+
   public constructor(
     private readonly userService: UserService,
   ) {}

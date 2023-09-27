@@ -53,10 +53,9 @@ export class AuthComponent extends AbstractFormComponent<Login> {
     }
 
     this.userService.signIn(new Login(form.getRawValue())).pipe(
-      tap(isAuthorized => {
-        if (isAuthorized) {
+      tap(isLoginSucceed => {
+        if (isLoginSucceed) {
           this.router.navigate(['/']);
-          this.userService.isAuthorized$.next(true);
         }
       }),
       takeUntilDestroy(this),

@@ -8,6 +8,8 @@
   >
     Logout
   </button>
+
+  <div class="user-info" *ngIf="user$ | async as user">{{ user.name }}</div>
 </div>
 
 <a
