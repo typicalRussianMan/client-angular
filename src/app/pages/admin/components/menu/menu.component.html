@@ -1,20 +1,31 @@
 <div class="app-header">
   <h2 class="app-name">Blogs Admin</h2>
 
+  <div class="user-info" *ngIf="user$ | async as user">Login as: {{ user.name }}</div>
+
   <button
     (click)="onLogoutClick()"
     mat-raised-button
-    color="primary"
-  >
+    color="primary">
     Logout
   </button>
 
-  <div class="user-info" *ngIf="user$ | async as user">{{ user.name }}</div>
 </div>
 
 <a
   routerLink="/admin/blogs"
-  color="menu-link"
   mat-stroked-button>
   Blogs
+</a>
+
+<a
+  routerLink="/admin/blogs"
+  mat-stroked-button>
+  Rubrics
+</a>
+
+<a
+  routerLink="/admin/blogs"
+  mat-stroked-button>
+  Tags
 </a>

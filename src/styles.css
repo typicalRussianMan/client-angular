@@ -4,15 +4,15 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
-  --font-size-xs: 0.75rem;
+  --font-size-xs: 0.9rem;
   --font-size-s: 1rem;
   --font-size-m: 1.5rem;
   --font-size-l: 2rem;
   --font-size-xl: 3rem;
 
-  --container-shadow: 10px 0 0 #0006;
+  --container-shadow: 0 0 10px #0006;
 
-  --bg-primary: rgb(236, 236, 236);
+  --bg-primary: rgb(255, 255, 255);
 }
 
 .page-title {

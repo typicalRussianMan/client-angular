@@ -12,11 +12,14 @@ import { AdminModule } from './pages/admin/admin.module';
 import { CoreModule } from './core.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
+import { CreateBlogComponent } from './pages/admin/components/create-blog/create-blog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlogsComponent,
+    CreateBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     CoreModule,
     AdminModule,
     AuthModule,

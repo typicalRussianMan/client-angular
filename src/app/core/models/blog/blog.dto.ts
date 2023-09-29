@@ -6,6 +6,9 @@ export interface BlogBaseDto {
 
   /** Content. */
   readonly content: string;
+
+  /** Rubric. */
+  readonly rubric: string | null;
 }
 
 /** Blog DTO. */
@@ -15,7 +18,7 @@ export interface BlogDto extends BlogBaseDto {
   readonly id: number;
 
   /** Author name. */
-  readonly authorName: string;
+  readonly userName: string;
 
   /** Date string when blog was created. */
   readonly createdAt: string;

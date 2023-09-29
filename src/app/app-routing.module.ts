@@ -4,6 +4,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
+import { CreateBlogComponent } from './pages/admin/components/create-blog/create-blog.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,22 @@ const routes: Routes = [
     children: [
       {
         path: 'blogs',
-        component: BlogsComponent,
+        // component: BlogsComponent,
+        children: [
+          {
+            path: '',
+            component: BlogsComponent,
+          },
+          {
+            path: 'new',
+            component: CreateBlogComponent,
+          },
+          {
+            path: 'edit/:id',
+            component: CreateBlogComponent
+          }
+
+        ]
       },
       {
         path: '**',

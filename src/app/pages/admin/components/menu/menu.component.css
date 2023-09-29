@@ -5,9 +5,20 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  box-shadow: var(--container-shadow);
+}
+
+.app-header {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgb(87, 188, 255);
 }
 
 .app-name {
   font-size: var(--font-size-l);
   margin-block: 15px;
+}
+
+.user-info {
+  margin-block: 5px;
 }

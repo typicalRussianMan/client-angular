@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IMapper } from "../mapper/mapper";
 import { Blog, BlogBase } from "./blog";
 import { BlogBaseDto, BlogDto } from "./blog.dto";
 import { DateTime } from 'luxon';
@@ -16,11 +15,12 @@ export class BlogMapper implements
   /** @inheritdoc */
   public fromDto(dto: BlogDto): Blog {
     return new Blog({
-      authorName: dto.authorName,
+      authorName: dto.userName,
       content: dto.content,
       createdAt: DateTime.fromISO(dto.createdAt),
       id: dto.id,
       title: dto.title,
+      rubric: dto.rubric
     });
   }
 
@@ -29,6 +29,7 @@ export class BlogMapper implements
     return {
       content: model.content,
       title: model.title,
+      rubric: model.rubric
     };
   }
 }

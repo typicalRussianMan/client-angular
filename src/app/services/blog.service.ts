@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NEVER, Observable, catchError, map, throwError } from 'rxjs';
+import { NEVER, Observable, catchError, map, throwError, tap } from 'rxjs';
 import { Blog, BlogBase } from '../core/models/blog/blog';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
@@ -28,11 +28,28 @@ export class BlogService {
     return this.http.get<readonly BlogDto[]>(this.blogUrl.toString())
       .pipe(
         map(blogs => blogs.map(this.blogMapper.fromDto)),
+        // @ts-ignore
+        tap(e => console.log(e)),
         catchError(() => {
           this.userService.logout();
           return NEVER;
         })
       );
+  }
+
+  public editBlog(id: string, blog: BlogBase): Observable<void> {
+    const url = `${this.blogUrl}/${id}`;
+    console.log(url)
+    return this.http.patch(url, this.blogMapper.toDto(blog)).pipe(
+        map(() => void 0),
+        catchError(err => {
+          if (isAppErrorDto(err)) {
+            return throwError(this.errorMapper.fromDto(err))
+          }
+
+          return NEVER;
+        })
+      )
   }
 
   public createBlog(blog: BlogBase): Observable<void> {
@@ -49,5 +66,20 @@ export class BlogService {
         return NEVER;
       })
     )
+  }
+
+  public getBlog(id: string): Observable<Blog> {
+    const url = `${this.blogUrl}/${id}`;
+    return this.http.get<BlogDto>(url)
+      .pipe(
+        map(this.blogMapper.fromDto),
+        catchError(err => {
+          if (isAppErrorDto(err)) {
+            return throwError(this.errorMapper.fromDto(err))
+          }
+
+          return NEVER;
+        }),
+      )
   }
 }

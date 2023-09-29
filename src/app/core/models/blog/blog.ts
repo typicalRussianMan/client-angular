@@ -8,9 +8,13 @@ export class BlogBase {
   /** Content. */
   public readonly content: string;
 
+  /** Rubric. */
+  readonly rubric: string | null;
+
   public constructor(data: BlogBase) {
     this.content = data.content;
     this.title = data.title;
+    this.rubric = data.rubric;
   }
 }
 
@@ -30,6 +34,7 @@ export class Blog extends BlogBase {
     super({
       content: data.content,
       title: data.title,
+      rubric: data.rubric
     })
     this.authorName = data.authorName;
     this.createdAt = data.createdAt;

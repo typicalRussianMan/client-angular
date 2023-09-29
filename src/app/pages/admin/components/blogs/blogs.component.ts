@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DateTime } from 'luxon';
 import { Observable } from 'rxjs';
 import { Blog } from 'src/app/core/models/blog/blog';
@@ -16,6 +17,7 @@ export class BlogsComponent {
 
   public constructor(
     blogService: BlogService,
+    private readonly router: Router,
   ) {
     this.blogs$ = blogService.getBlogs();
   }
@@ -26,5 +28,9 @@ export class BlogsComponent {
 
   protected formatDateTime(dateTime: DateTime): string {
     return dateTime.toFormat('DD \' at \' T')
+  }
+
+  protected navigate(id: number): void {
+    this.router.navigate(['admin','blogs', 'edit', id]);
   }
 }
