@@ -15,11 +15,11 @@ type CreateBlogFormControls = FlatControlsOf<BlogBase>
 
 @Destroyable()
 @Component({
-  selector: 'app-create-blog',
-  templateUrl: './create-blog.component.html',
-  styleUrls: ['./create-blog.component.css']
+  selector: 'app-blog-edit-form',
+  templateUrl: './blog-edit-form.component.html',
+  styleUrls: ['./blog-edit-form.component.css']
 })
-export class CreateBlogComponent extends AbstractFormComponent<BlogBase> implements OnInit {
+export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> implements OnInit {
 
   /** Page title. */
   protected readonly title$ = new BehaviorSubject<string | null>(null);
@@ -73,6 +73,7 @@ export class CreateBlogComponent extends AbstractFormComponent<BlogBase> impleme
       .subscribe()
   }
 
+  /** Handles form submitting. */
   public onSubmit(): void {
     this.form.markAllAsTouched();
 
@@ -82,21 +83,19 @@ export class CreateBlogComponent extends AbstractFormComponent<BlogBase> impleme
 
     const formData = this.form.getRawValue();
 
+    const blog = new BlogBase({
+      content: formData.content.trim(),
+      title: formData.title.trim(),
+      rubric: formData.rubric?.trim() ?? null,
+    })
+
     this.id$.pipe(
       switchMap(id => {
         if (!id) {
-          return this.blogService.createBlog(new BlogBase({
-            content: formData.content.trim(),
-            title: formData.title.trim(),
-            rubric: formData.rubric?.trim() ?? null,
-          }));
+          return this.blogService.createBlog(blog);
         }
 
-        return this.blogService.editBlog(id, new BlogBase({
-          content: formData.content.trim(),
-          title: formData.title.trim(),
-          rubric: formData.rubric?.trim() ?? null,
-        }))
+        return this.blogService.editBlog(id, blog)
       }),
       tap(() => {
         this.router.navigate(['/']);

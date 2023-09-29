@@ -4,6 +4,7 @@ import { Observable, map, of, tap } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { TokenService } from '../services/token.service';
 
+/** Authorization guard. */
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
 

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Blog } from 'src/app/core/models/blog/blog';
 import { BlogService } from 'src/app/services/blog.service';
 
+/** Blogs component. */
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -13,6 +14,7 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class BlogsComponent {
 
+  /** Blogs. */
   protected readonly blogs$: Observable<readonly Blog[]>;
 
   public constructor(
@@ -22,15 +24,29 @@ export class BlogsComponent {
     this.blogs$ = blogService.getBlogs();
   }
 
+  /**
+   * Created track by function for blogs.
+   * @param _index Index.
+   * @param blog Blog.
+   */
   protected trackByBlog(_index: number, blog: Blog): Blog['id'] {
     return blog.id;
   }
 
+  /**
+   * Formats date-time to readable form.
+   * @param dateTime
+   * @returns
+   */
   protected formatDateTime(dateTime: DateTime): string {
     return dateTime.toFormat('DD \' at \' T')
   }
 
-  protected navigate(id: number): void {
+  /**
+   * Navigates to edit blog page.
+   * @param id Blog ID.
+   */
+  protected navigateToEdit(id: number): void {
     this.router.navigate(['admin','blogs', 'edit', id]);
   }
 }

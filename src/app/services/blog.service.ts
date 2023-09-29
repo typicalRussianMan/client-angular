@@ -14,6 +14,8 @@ export class BlogService {
 
   private readonly blogUrl: URL;
 
+  private readonly blogUrlWithId = (id: Blog['id']) => `${this.blogUrl}/${id}`
+
   public constructor(
     private readonly http: HttpClient,
     private readonly blogMapper: BlogMapper,
@@ -24,23 +26,25 @@ export class BlogService {
     this.blogUrl = new URL('blogs', appConfig.apiUrl);
   }
 
+  /** Gets all blogs. */
   public getBlogs(): Observable<readonly Blog[]> {
     return this.http.get<readonly BlogDto[]>(this.blogUrl.toString())
       .pipe(
         map(blogs => blogs.map(this.blogMapper.fromDto)),
-        // @ts-ignore
-        tap(e => console.log(e)),
         catchError(() => {
           this.userService.logout();
           return NEVER;
-        })
+        }),
       );
   }
 
-  public editBlog(id: string, blog: BlogBase): Observable<void> {
-    const url = `${this.blogUrl}/${id}`;
-    console.log(url)
-    return this.http.patch(url, this.blogMapper.toDto(blog)).pipe(
+  /**
+   * Edits blog.
+   * @param id Blog id.
+   * @param blog Updated blog.
+   */
+  public editBlog(id: Blog['id'], blog: BlogBase): Observable<void> {
+    return this.http.patch(this.blogUrlWithId(id), this.blogMapper.toDto(blog)).pipe(
         map(() => void 0),
         catchError(err => {
           if (isAppErrorDto(err)) {
@@ -49,9 +53,13 @@ export class BlogService {
 
           return NEVER;
         })
-      )
+      );
   }
 
+  /**
+   * Creates new blog.
+   * @param blog Blog.
+   */
   public createBlog(blog: BlogBase): Observable<void> {
     return this.http.post(
       this.blogUrl.toString(),
@@ -68,6 +76,10 @@ export class BlogService {
     )
   }
 
+  /**
+   * Gets blog by id.
+   * @param id Blog id.
+   */
   public getBlog(id: string): Observable<Blog> {
     const url = `${this.blogUrl}/${id}`;
     return this.http.get<BlogDto>(url)

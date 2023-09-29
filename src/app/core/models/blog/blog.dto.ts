@@ -1,4 +1,5 @@
 
+/** Blog base DTO. */
 export interface BlogBaseDto {
 
   /** Title. */

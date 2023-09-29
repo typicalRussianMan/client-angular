@@ -9,12 +9,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MenuComponent {
 
+  /** Current user. */
   protected readonly user$ = this.userService.currentUser$;
 
   public constructor(
     private readonly userService: UserService,
   ) {}
 
+  /** Logouts current user. */
   protected onLogoutClick(): void {
     this.userService.logout();
   }

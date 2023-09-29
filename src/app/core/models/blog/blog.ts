@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 
+/** Blog base. */
 export class BlogBase {
 
   /** Title. */

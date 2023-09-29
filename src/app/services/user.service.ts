@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Login } from 'src/app/core/models/login/login';
-import { BehaviorSubject, Observable, tap, map, catchError, of, switchMap } from 'rxjs';
+import { Observable, tap, map, catchError, of, switchMap, throwError, NEVER } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 import { LoginMapper } from '../core/models/login/login.mapper';
 import { TokenMapper } from '../core/models/token/token.mapper';
 import { TokenDto } from '../core/models/token/token.dto';
-import { StorageService } from './storage.service';
-import { NotificationService } from './notification.service';
-import { AppErrorDto } from '../core/models/app-error/app-error.dto';
+import { isAppErrorDto } from '../core/models/app-error/app-error.dto';
 import { TokenService } from './token.service';
 import { Token } from '../core/models/token/token';
 import { User } from '../core/models/user/user';
 import { UserDto } from '../core/models/user/user.dto';
 import { UserMapper } from '../core/models/user/user.mapper';
+import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
 
 
 @Injectable({ providedIn: 'root' })
@@ -34,8 +33,8 @@ export class UserService {
     private readonly loginMapper: LoginMapper,
     private readonly tokenMapper: TokenMapper,
     private readonly tokenService: TokenService,
-    private readonly notificationService: NotificationService,
     private readonly userMapper: UserMapper,
+    private readonly appErrorMapper: AppErrorMapper,
     config: AppConfigService,
   ) {
     this.loginUrl = new URL('auth/login', config.apiUrl);
@@ -73,21 +72,25 @@ export class UserService {
    * Logins user.
    * @param login Login data.
    */
-  public signIn(login: Login): Observable<boolean> {
+  public signIn(login: Login): Observable<void> {
     return this.http.post<TokenDto>(
       this.loginUrl.toString(),
       this.loginMapper.toDto(login),
     ).pipe(
       map(token => this.tokenMapper.fromDto(token)),
       tap(token => this.tokenService.set(token)),
-      map(() => true),
-      catchError((err: AppErrorDto) => {
-        this.notificationService.showMessage(err.Message);
-        return of(false);
+      map(() => void 0),
+      catchError(err => {
+        if (isAppErrorDto(err)) {
+          return throwError(this.appErrorMapper.fromDto(err));
+        }
+
+        return NEVER;
       })
     );
   }
 
+  /** Logouts user. */
   public logout(): void {
     this.tokenService.remove();
     this.requireLogin();
@@ -98,7 +101,10 @@ export class UserService {
     this.router.navigate(['/auth'])
   }
 
-
+  /**
+   * Checks if token valid.
+   * @param token Token.
+   */
   public verifyToken(token: Token): Observable<boolean> {
     return this.http.post(this.verifyTokenUrl.toString(), { token: token.access })
       .pipe(

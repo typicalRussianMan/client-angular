@@ -4,7 +4,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
 import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
-import { CreateBlogComponent } from './pages/admin/components/create-blog/create-blog.component';
+import { BlogEditFormComponent } from './pages/admin/components/create-blog/blog-edit-form.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,6 @@ const routes: Routes = [
     children: [
       {
         path: 'blogs',
-        // component: BlogsComponent,
         children: [
           {
             path: '',
@@ -26,14 +25,13 @@ const routes: Routes = [
           },
           {
             path: 'new',
-            component: CreateBlogComponent,
+            component: BlogEditFormComponent,
           },
           {
             path: 'edit/:id',
-            component: CreateBlogComponent
-          }
-
-        ]
+            component: BlogEditFormComponent,
+          },
+        ],
       },
       {
         path: '**',

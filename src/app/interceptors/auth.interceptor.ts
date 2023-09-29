@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
 
+/** Interceptor to insert authorization header in http request. */
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
 
