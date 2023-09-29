@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { IMapper } from "../mapper/mapper";
-import { Blog } from "./blog";
-import { BlogDto } from "./blog.dto";
+import { Blog, BlogBase } from "./blog";
+import { BlogBaseDto, BlogDto } from "./blog.dto";
 import { DateTime } from 'luxon';
+import { IMapperFromDto } from '../mapper/mapper-from-dto';
+import { IMapperToDto } from '../mapper/mapper-to-dto';
 
 /** Blog mapper. */
 @Injectable({ providedIn: 'root' })
-export class BlogMapper implements IMapper<BlogDto, Blog> {
+export class BlogMapper implements
+  IMapperFromDto<BlogDto, Blog>,
+  IMapperToDto<BlogBase, BlogBaseDto>
+{
 
   /** @inheritdoc */
   public fromDto(dto: BlogDto): Blog {
@@ -20,12 +25,9 @@ export class BlogMapper implements IMapper<BlogDto, Blog> {
   }
 
   /** @inheritdoc */
-  public toDto(model: Blog): BlogDto {
+  public toDto(model: BlogBase): BlogBaseDto {
     return {
-      authorName: model.authorName,
       content: model.content,
-      createdAt: model.createdAt.toString(),
-      id: model.id,
       title: model.title,
     };
   }
