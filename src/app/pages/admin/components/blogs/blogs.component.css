@@ -1,0 +1,40 @@
+:host {
+  margin-inline: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+
+.blog {
+  margin-block: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #b4b4b4;
+}
+
+.blog__title {
+  margin: 0;
+  font-size: var(--font-size-l);
+}
+
+.blog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.blog__controls {
+  display: flex;
+  gap: 10px;
+}
+
+.blog__info {
+  font-size: var(--font-size-xs);
+  color: #5c5c5c;
+  margin-bottom: 5px;
+}

@@ -3,6 +3,7 @@ import { IMapperFromDto } from "../mapper/mapper-from-dto";
 import { UserDto } from "./user.dto";
 import { User } from "./user";
 
+/** User mapper. */
 @Injectable({ providedIn: 'root' })
 export class UserMapper implements IMapperFromDto<UserDto, User> {
 

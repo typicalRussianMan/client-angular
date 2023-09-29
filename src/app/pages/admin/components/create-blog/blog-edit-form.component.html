@@ -1,0 +1,49 @@
+<ng-container *ngIf="title$ | async">
+
+<h1 class="page-title">{{ title$ | async }}</h1>
+
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="row">
+
+    <mat-form-field class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput type="text" formControlName="title">
+      <mat-error *ngIf="hasError('title')">
+        {{ getError('title') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Rubric</mat-label>
+      <input matInput type="text" formControlName="rubric">
+      <mat-error *ngIf="hasError('rubric')">
+        {{ getError('rubric') }}
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <mat-form-field class="full-width" t>
+    <mat-label>Content</mat-label>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+      formControlName="content"></textarea>
+    <mat-error *ngIf="hasError('content')">
+      {{ getError('content') }}
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit">
+    Submit
+  </button>
+
+</form>
+
+</ng-container>

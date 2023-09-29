@@ -1,4 +1,14 @@
-<h1 class="page-title">Blogs</h1>
+<div class="page-header">
+  <h1 class="page-title">Blogs</h1>
+  <a
+    mat-flat-button
+    color="primary"
+    routerLink="./new">
+    + New
+  </a>
+
+</div>
+
 
 <ng-container *ngIf="blogs$ | async as blogs">
 
@@ -10,7 +20,26 @@
       class="blog"
       *ngFor="let blog of blogs; trackBy: trackByBlog">
 
-      <h3 class="blog__title">{{ blog.title }}</h3>
+      <div class="blog__header">
+        <h3 class="blog__title">{{ blog.title }}</h3>
+
+        <div class="blog__controls">
+          <button
+            type="button"
+            mat-mini-fab
+            color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button
+            type="button"
+            mat-mini-fab
+            color="primary"
+            (click)="navigateToEdit(blog.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
       <div class="blog__info">
         Created by {{ blog.authorName }} at {{ formatDateTime(blog.createdAt) }}
       </div>

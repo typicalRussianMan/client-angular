@@ -18,6 +18,10 @@ export class NotificationService {
     this.snackBar.open(message, 'Hide', { duration: DEFAULT_HIDE_DELAY });
   }
 
+  /**
+   * Shows app error message.
+   * @param error App error.
+   */
   public showAppError(error: AppError): void {
     this.showMessage(error.message);
   }

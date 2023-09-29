@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
+import { NEVER, catchError, of, tap } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
+import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Login } from 'src/app/core/models/login/login';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
@@ -29,6 +30,7 @@ export class AuthComponent extends AbstractFormComponent<Login> {
   public constructor(
     private readonly fb: NonNullableFormBuilder,
     private readonly userService: UserService,
+    private readonly notificationService: NotificationService,
     private readonly router: Router,
   ) {
     super();
@@ -53,11 +55,13 @@ export class AuthComponent extends AbstractFormComponent<Login> {
     }
 
     this.userService.signIn(new Login(form.getRawValue())).pipe(
-      tap(isAuthorized => {
-        if (isAuthorized) {
-          this.router.navigate(['/']);
-          this.userService.isAuthorized$.next(true);
-        }
+      tap(() => {
+        this.router.navigate(['/']);
+      }),
+      catchError((err: AppError) => {
+        this.notificationService.showAppError(err);
+
+        return NEVER;
       }),
       takeUntilDestroy(this),
     ).subscribe();
