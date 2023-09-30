@@ -1,0 +1,47 @@
+<div class="page-header">
+
+  <h1 class="page-title">Rubrics</h1>
+
+  <a
+    mat-flat-button
+    color="primary"
+    routerLink="./new">
+    + New
+  </a>
+
+</div>
+
+<ng-container *ngIf="rubrics$ | async as rubrics">
+
+  <div *ngIf="rubrics.length > 0">
+
+    <ng-container *ngFor="let rubric of rubrics; trackBy: trackByRubric">
+
+      <mat-divider></mat-divider>
+
+      <div class="rubric">
+        <span class="rubric__name">{{ rubric.id }}: {{ rubric.name }}</span>
+        <div class="rubric__controls">
+          <button
+            type="button"
+            mat-mini-fab
+            color="warn"
+            (click)="deleteRubric(rubric)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button
+            type="button"
+            mat-mini-fab
+            color="primary"
+            (click)="navigateToEdit(rubric.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</ng-container>

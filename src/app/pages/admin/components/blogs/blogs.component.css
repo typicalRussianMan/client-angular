@@ -2,13 +2,6 @@
   margin-inline: 20px;
 }
 
-.page-header {
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-  align-items: center;
-}
-
 .blog {
   margin-block: 10px;
   padding: 10px;

@@ -20,6 +20,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: 20px;
 }
 
+.page-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+
 .full-width {
   width: 100%;
 }

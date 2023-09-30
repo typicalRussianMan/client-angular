@@ -80,7 +80,7 @@ export class BlogService {
    * Gets blog by id.
    * @param id Blog id.
    */
-  public getBlog(id: string): Observable<Blog> {
+  public getBlog(id: Blog['id']): Observable<Blog> {
     const url = `${this.blogUrl}/${id}`;
     return this.http.get<BlogDto>(url)
       .pipe(
@@ -93,5 +93,20 @@ export class BlogService {
           return NEVER;
         }),
       )
+  }
+
+  public deleteBlog(id: Blog['id']): Observable<void> {
+    const url = this.blogUrlWithId(id);
+    return this.http.delete(url)
+    .pipe(
+      map(() => void 0),
+      catchError(err => {
+        if (isAppErrorDto(err)) {
+          return throwError(this.errorMapper.fromDto(err))
+        }
+
+        return NEVER;
+      }),
+    )
   }
 }

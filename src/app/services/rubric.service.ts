@@ -14,6 +14,8 @@ export class RubricService {
 
   private readonly rubricUrl: URL;
 
+  private readonly rubricUrlWithId = (id: Rubric['id']) => `${this.rubricUrl}/${id}`
+
   public constructor(
     private readonly http: HttpClient,
     private readonly rubricMapper: RubricMapper,
@@ -62,8 +64,23 @@ export class RubricService {
    */
   public deleteRubric(rubric: Rubric): Observable<void> {
     return this.http.delete(
-      this.rubricUrl.toString(),
-      { body: this.rubricMapper.toDto(rubric) },
+      this.rubricUrlWithId(rubric.id),
+    ).pipe(
+      map(() => void 0),
+      catchError(err => {
+        if (isAppErrorDto(err)) {
+          return throwError(this.errorMapper.fromDto(err))
+        }
+
+        return NEVER;
+      })
+    )
+  }
+
+  public editRubric(rubric: Rubric): Observable<void> {
+    return this.http.patch(
+      this.rubricUrlWithId(rubric.id),
+      this.rubricMapper.toBaseDto(rubric)
     ).pipe(
       map(() => void 0),
       catchError(err => {

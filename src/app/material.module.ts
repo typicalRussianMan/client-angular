@@ -24,7 +24,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 const modules = [
   MatIconModule,
@@ -54,6 +55,7 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
+  MatDividerModule,
 ];
 
 /**

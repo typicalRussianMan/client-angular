@@ -95,7 +95,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
           return this.blogService.createBlog(blog);
         }
 
-        return this.blogService.editBlog(id, blog)
+        return this.blogService.editBlog(Number(id), blog)
       }),
       tap(() => {
         this.router.navigate(['/']);

@@ -1,0 +1,19 @@
+:host {
+  margin-inline: 20px;
+}
+
+.rubric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 10px;
+}
+
+.rubric__name {
+  font-size: var(--font-size-m);
+}
+
+.rubric__controls {
+  display: flex;
+  gap: 10px;
+}
