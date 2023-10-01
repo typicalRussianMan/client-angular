@@ -95,6 +95,10 @@ export class BlogService {
       )
   }
 
+  /**
+   * Deletes blog by id.
+   * @param id Id.
+   */
   public deleteBlog(id: Blog['id']): Observable<void> {
     const url = this.blogUrlWithId(id);
     return this.http.delete(url)

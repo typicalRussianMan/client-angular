@@ -77,6 +77,10 @@ export class RubricService {
     )
   }
 
+  /**
+   * Edit rubric.
+   * @param rubric Rubric.
+   */
   public editRubric(rubric: Rubric): Observable<void> {
     return this.http.patch(
       this.rubricUrlWithId(rubric.id),
