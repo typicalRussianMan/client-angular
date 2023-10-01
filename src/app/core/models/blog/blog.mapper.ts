@@ -20,7 +20,8 @@ export class BlogMapper implements
       createdAt: DateTime.fromISO(dto.createdAt),
       id: dto.id,
       title: dto.title,
-      rubric: dto.rubric
+      rubric: dto.rubric,
+      tags: dto.tags,
     });
   }
 
@@ -29,7 +30,8 @@ export class BlogMapper implements
     return {
       content: model.content,
       title: model.title,
-      rubric: model.rubric
+      rubric: model.rubric,
+      tags: model.tags,
     };
   }
 }

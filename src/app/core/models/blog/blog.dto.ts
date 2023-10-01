@@ -10,6 +10,9 @@ export interface BlogBaseDto {
 
   /** Rubric. */
   readonly rubric: string | null;
+
+  /** Tags. */
+  readonly tags: readonly string[];
 }
 
 /** Blog DTO. */

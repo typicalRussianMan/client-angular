@@ -30,7 +30,10 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
     content: this.fb.control('', Validators.required),
     title: this.fb.control('', Validators.required),
     rubric: this.fb.control('', Validators.required),
+    tags: this.fb.control([]),
   });
+
+  protected readonly tagsControl = this.fb.control('');
 
   public constructor(
     private readonly fb: NonNullableFormBuilder,
@@ -60,7 +63,10 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
                 content: blog.content,
                 rubric: blog.rubric,
                 title: blog.title,
+                tags: blog.tags,
               });
+
+              this.tagsControl.setValue(blog.tags.join(','));
 
               this.title$.next('Edit Blog');
               this.id$.next(id);
@@ -83,10 +89,17 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
 
     const formData = this.form.getRawValue();
 
+    const tags = this.tagsControl
+      .getRawValue()
+      .split(',')
+      .map(item => item.trim())
+      .filter(Boolean);
+
     const blog = new BlogBase({
       content: formData.content.trim(),
       title: formData.title.trim(),
       rubric: formData.rubric?.trim() ?? null,
+      tags,
     })
 
     this.id$.pipe(

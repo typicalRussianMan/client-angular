@@ -42,6 +42,10 @@ export class BlogsComponent {
     return blog.id;
   }
 
+  protected trackByTag(_index: number, tag: string): string {
+    return tag;
+  }
+
   /**
    * Formats date-time to readable form.
    * @param dateTime

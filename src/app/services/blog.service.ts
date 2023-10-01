@@ -44,7 +44,10 @@ export class BlogService {
    * @param blog Updated blog.
    */
   public editBlog(id: Blog['id'], blog: BlogBase): Observable<void> {
-    return this.http.patch(this.blogUrlWithId(id), this.blogMapper.toDto(blog)).pipe(
+    return this.http.patch(
+      this.blogUrlWithId(id),
+      { ...this.blogMapper.toDto(blog), tagNames: blog.tags.join(',') }
+    ).pipe(
         map(() => void 0),
         catchError(err => {
           if (isAppErrorDto(err)) {
@@ -63,7 +66,7 @@ export class BlogService {
   public createBlog(blog: BlogBase): Observable<void> {
     return this.http.post(
       this.blogUrl.toString(),
-      this.blogMapper.toDto(blog),
+      { ...this.blogMapper.toDto(blog), tagNames: blog.tags.join(',') },
     ).pipe(
       map(() => void 0),
       catchError(err => {
