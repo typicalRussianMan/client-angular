@@ -4,7 +4,7 @@ import { RubricMapper } from "../core/models/rubric/rubric.mapper";
 import { UserService } from "./user.service";
 import { AppErrorMapper } from "../core/models/app-error/app-error.mapper";
 import { AppConfigService } from "./app-config.service";
-import { Rubric } from "../core/models/rubric/rubric";
+import { Rubric, RubricBase } from "../core/models/rubric/rubric";
 import { NEVER, Observable, catchError, map, throwError } from "rxjs";
 import { RubricDto } from "../core/models/rubric/rubric.dto";
 import { isAppErrorDto } from "../core/models/app-error/app-error.dto";
@@ -42,7 +42,7 @@ export class RubricService {
    * Creates new rubric.
    * @param rubric Rubric.
    */
-  public createRubric(rubric: Rubric): Observable<void> {
+  public createRubric(rubric: RubricBase): Observable<void> {
     return this.http.post(
       this.rubricUrl.toString(),
       this.rubricMapper.toDto(rubric),
@@ -84,7 +84,7 @@ export class RubricService {
   public editRubric(rubric: Rubric): Observable<void> {
     return this.http.patch(
       this.rubricUrlWithId(rubric.id),
-      this.rubricMapper.toBaseDto(rubric)
+      this.rubricMapper.toDto(rubric)
     ).pipe(
       map(() => void 0),
       catchError(err => {

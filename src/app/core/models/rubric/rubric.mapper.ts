@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
-import { IMapper } from "../mapper/mapper";
 import { RubricBaseDto, RubricDto } from "./rubric.dto";
-import { Rubric } from "./rubric";
+import { Rubric, RubricBase } from "./rubric";
+import { IMapperFromDto } from "../mapper/mapper-from-dto";
+import { IMapperToDto } from "../mapper/mapper-to-dto";
 
 /** Rubric mapper. */
 @Injectable({ providedIn: 'root' })
-export class RubricMapper implements IMapper<RubricDto, Rubric> {
+export class RubricMapper implements
+  IMapperFromDto<RubricDto, Rubric>,
+  IMapperToDto<RubricBaseDto, RubricBase> {
 
   /** @inheritdoc */
   public fromDto(dto: RubricDto): Rubric {
@@ -16,18 +19,7 @@ export class RubricMapper implements IMapper<RubricDto, Rubric> {
   }
 
   /** @inheritdoc */
-  public toDto(model: Rubric): RubricDto {
-    return {
-      name: model.name,
-      id: model.id,
-    };
-  }
-
-  /**
-   * Maps rubric to base DTO.
-   * @param model Rubric.
-   */
-  public toBaseDto(model: Rubric): RubricBaseDto {
+  public toDto(model: RubricBase): RubricBaseDto {
     return {
       name: model.name,
     };

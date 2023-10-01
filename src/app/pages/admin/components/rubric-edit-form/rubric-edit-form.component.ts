@@ -87,8 +87,7 @@ export class RubricEditFormComponent
       switchMap(id => {
         if (!id) {
           return this.rubricService.createRubric({
-            ...rubric,
-            id: Number(id),
+            ...rubric
           });
         }
 
