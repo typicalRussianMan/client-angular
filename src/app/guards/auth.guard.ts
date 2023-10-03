@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 import { UserService } from '../services/user.service';
 import { TokenService } from '../services/token.service';
@@ -18,6 +18,7 @@ export class AuthGuard {
     const token = this.tokenService.get();
 
     if (token === null) {
+      this.userService.requireLogin();
       return of(false);
     }
 

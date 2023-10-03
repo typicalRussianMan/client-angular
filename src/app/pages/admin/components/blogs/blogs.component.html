@@ -1,5 +1,7 @@
 <div class="page-header">
+
   <h1 class="page-title">Blogs</h1>
+
   <a
     mat-flat-button
     color="primary"
@@ -21,7 +23,10 @@
       *ngFor="let blog of blogs; trackBy: trackByBlog">
 
       <div class="blog__header">
-        <h3 class="blog__title">{{ blog.title }}</h3>
+        <h3 class="blog__title">
+          <span *ngIf="blog.rubric">{{blog.rubric}}:</span>
+          {{ blog.title }}
+        </h3>
 
         <div class="blog__controls">
           <button
@@ -41,10 +46,21 @@
           </button>
         </div>
       </div>
+
       <div class="blog__info">
         Created by {{ blog.authorName }} at {{ formatDateTime(blog.createdAt) }}
       </div>
+
       <div class="blog__content">{{ blog.content }}</div>
+
+      <div class="blog__tags">
+        <span
+          class="blog__tag"
+          *ngFor="let tag of blog.tags; trackBy: trackByTag">
+          #{{tag}}
+        </span>
+      </div>
+      
     </div>
 
   </div>

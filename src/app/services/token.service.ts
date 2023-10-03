@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { StorageService } from "./storage.service";
-import { Token } from "../core/models/token/token";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
+import { Token } from '../core/models/token/token';
+import { BehaviorSubject } from 'rxjs';
 
 const TOKEN_STORAGE_KEY = '__token__';
 

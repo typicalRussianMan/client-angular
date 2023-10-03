@@ -12,10 +12,14 @@ export class BlogBase {
   /** Rubric. */
   readonly rubric: string | null;
 
+  /** Tags. */
+  readonly tags: readonly string[];
+
   public constructor(data: BlogBase) {
     this.content = data.content;
     this.title = data.title;
     this.rubric = data.rubric;
+    this.tags = data.tags;
   }
 }
 
@@ -35,7 +39,8 @@ export class Blog extends BlogBase {
     super({
       content: data.content,
       title: data.title,
-      rubric: data.rubric
+      rubric: data.rubric,
+      tags: data.tags,
     })
     this.authorName = data.authorName;
     this.createdAt = data.createdAt;

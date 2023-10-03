@@ -60,7 +60,6 @@ export class UserService {
     return this.http.get<UserDto>(this.userUrl.toString())
       .pipe(
         map(this.userMapper.fromDto),
-        tap(console.log),
         catchError(e => {
           this.logout();
           return of(null);

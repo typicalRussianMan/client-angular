@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { BehaviorSubject, NEVER, Observable, catchError, switchMap, tap } from 'rxjs';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Blog } from 'src/app/core/models/blog/blog';
+import { trackById, trackByValue } from 'src/app/core/utils/angular/track-by';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { BlogService } from 'src/app/services/blog.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -33,14 +34,11 @@ export class BlogsComponent {
     );
   }
 
-  /**
-   * Created track by function for blogs.
-   * @param _index Index.
-   * @param blog Blog.
-   */
-  protected trackByBlog(_index: number, blog: Blog): Blog['id'] {
-    return blog.id;
-  }
+  /** Track by function for blogs. */
+  protected trackByBlog = trackById<Blog>();
+
+  /** Track by tag. */
+  protected trackByTag = trackByValue<Blog>();
 
   /**
    * Formats date-time to readable form.

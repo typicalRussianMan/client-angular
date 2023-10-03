@@ -23,7 +23,7 @@
 
   </div>
 
-  <mat-form-field class="full-width" t>
+  <mat-form-field class="full-width">
     <mat-label>Content</mat-label>
     <textarea
       matInput
@@ -34,6 +34,14 @@
       formControlName="content"></textarea>
     <mat-error *ngIf="hasError('content')">
       {{ getError('content') }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Tags (separated by comma)</mat-label>
+    <input matInput type="text" formControlName="tags">
+    <mat-error *ngIf="hasError('tags')">
+      {{ getError('tags') }}
     </mat-error>
   </mat-form-field>
 
