@@ -8,6 +8,7 @@ import { Rubric, RubricBase } from '../core/models/rubric/rubric';
 import { NEVER, Observable, catchError, map, throwError } from 'rxjs';
 import { RubricDto } from '../core/models/rubric/rubric.dto';
 import { isAppErrorDto } from '../core/models/app-error/app-error.dto';
+import { CrudService } from '../core/utils/crud-service';
 
 @Injectable({ providedIn: 'root' })
 export class RubricService {

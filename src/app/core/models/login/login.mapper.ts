@@ -12,6 +12,6 @@ export class LoginMapper implements IMapperToDto<LoginDto, Login> {
     return {
       email: model.email,
       password: model.password,
-    }
+    };
   }
 }
