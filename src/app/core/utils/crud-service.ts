@@ -1,9 +1,14 @@
-import { HttpClient } from "@angular/common/http";
-import { NEVER, Observable, catchError, throwError } from "rxjs";
-import { AppConfigService } from "src/app/services/app-config.service";
-import { AppErrorMapper } from "../models/app-error/app-error.mapper";
-import { isAppErrorDto } from "../models/app-error/app-error.dto";
+import { HttpClient } from '@angular/common/http';
+import { NEVER, Observable, catchError, throwError } from 'rxjs';
+import { AppConfigService } from 'src/app/services/app-config.service';
 
+import { AppErrorMapper } from '../models/app-error/app-error.mapper';
+import { isAppErrorDto } from '../models/app-error/app-error.dto';
+
+/**
+ * Creates class with CRUD methods.
+ * @param route Route.
+ */
 export function CrudService<
   TDtoFromHttp extends {},
   TDtoToHttp extends {},
@@ -18,7 +23,7 @@ export function CrudService<
     public constructor(
       private readonly http: HttpClient,
       private readonly errorMapper: AppErrorMapper,
-      appConfig: AppConfigService
+      appConfig: AppConfigService,
     ) {
       this.routeUrl = new URL(route, appConfig.apiUrl);
     }

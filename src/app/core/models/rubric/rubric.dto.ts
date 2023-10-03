@@ -1,4 +1,4 @@
-import { StrictOmit } from "../../utils/types/strict-omit";
+import { StrictOmit } from '../../utils/types/strict-omit';
 
 /** Rubric DTO. */
 export interface RubricDto {

@@ -1,7 +1,9 @@
-import { Injectable } from "@angular/core";
-import { TokenDto } from "./token.dto";
-import { Token } from "./token";
-import { IMapper } from "../mapper/mapper";
+import { Injectable } from '@angular/core';
+
+import { IMapper } from '../mapper/mapper';
+
+import { TokenDto } from './token.dto';
+import { Token } from './token';
 
 @Injectable({ providedIn: 'root' })
 export class TokenMapper implements IMapper<TokenDto, Token> {
