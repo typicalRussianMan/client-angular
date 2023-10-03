@@ -18,6 +18,7 @@ export class AuthGuard {
     const token = this.tokenService.get();
 
     if (token === null) {
+      this.userService.requireLogin();
       return of(false);
     }
 

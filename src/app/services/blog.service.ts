@@ -4,11 +4,22 @@ import { Blog, BlogBase } from '../core/models/blog/blog';
 import { BlogMapper } from '../core/models/blog/blog.mapper';
 import { BlogBaseDto, BlogDto } from '../core/models/blog/blog.dto';
 import { CrudService } from '../core/utils/crud-service';
+import { HttpClient } from '@angular/common/http';
+import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class BlogService extends CrudService<BlogDto, BlogBaseDto>('blogs') {
 
   private readonly blogMapper = inject(BlogMapper);
+
+  public constructor(
+    http: HttpClient,
+    errorMapper: AppErrorMapper,
+    appConfig: AppConfigService,
+  ) {
+    super(http, errorMapper, appConfig);
+  }
 
   /** Gets all blogs. */
   public getBlogs(): Observable<readonly Blog[]> {
