@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, NEVER, Observable, catchError, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Blog, BlogBase } from 'src/app/core/models/blog/blog';
