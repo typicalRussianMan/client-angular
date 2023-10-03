@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
-import { Blog, BlogBase } from 'src/app/core/models/blog/blog';
+import { BlogBase } from 'src/app/core/models/blog/blog';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
 import { StrictOmit } from 'src/app/core/utils/types/strict-omit';
