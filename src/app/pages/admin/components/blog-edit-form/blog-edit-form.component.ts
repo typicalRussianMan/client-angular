@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, NEVER, Observable, catchError, switchMap, tap } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
@@ -11,7 +11,9 @@ import { StrictOmit } from 'src/app/core/utils/types/strict-omit';
 import { BlogService } from 'src/app/services/blog.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
-type CreateBlogFormControls = FlatControlsOf<BlogBase>
+type EditBlogForm = StrictOmit<BlogBase, 'tags'> & { tags: string };
+
+type CreateBlogFormControls = FlatControlsOf<EditBlogForm>
 
 @Destroyable()
 @Component({
@@ -19,7 +21,7 @@ type CreateBlogFormControls = FlatControlsOf<BlogBase>
   templateUrl: './blog-edit-form.component.html',
   styleUrls: ['./blog-edit-form.component.css']
 })
-export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> implements OnInit {
+export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> implements OnInit {
 
   /** Page title. */
   protected readonly title$ = new BehaviorSubject<string | null>(null);
@@ -30,10 +32,8 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
     content: this.fb.control('', Validators.required),
     title: this.fb.control('', Validators.required),
     rubric: this.fb.control('', Validators.required),
-    tags: this.fb.control([]),
+    tags: this.fb.control(''),
   });
-
-  protected readonly tagsControl = this.fb.control('');
 
   public constructor(
     private readonly fb: NonNullableFormBuilder,
@@ -56,6 +56,9 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
           return NEVER;
         }
 
+        this.title$.next('Edit Blog');
+        this.id$.next(id);
+
         return this.blogService.getBlog(id)
           .pipe(
             tap(blog => {
@@ -63,13 +66,8 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
                 content: blog.content,
                 rubric: blog.rubric,
                 title: blog.title,
-                tags: blog.tags,
+                tags: blog.tags.join(','),
               });
-
-              this.tagsControl.setValue(blog.tags.join(','));
-
-              this.title$.next('Edit Blog');
-              this.id$.next(id);
             }),
             catchError(() => this.router.navigate(['/'])),
           )
@@ -89,8 +87,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<BlogBase> imple
 
     const formData = this.form.getRawValue();
 
-    const tags = this.tagsControl
-      .getRawValue()
+    const tags = formData.tags
       .split(',')
       .map(item => item.trim())
       .filter(Boolean);

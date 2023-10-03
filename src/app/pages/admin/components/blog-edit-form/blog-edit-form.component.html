@@ -39,7 +39,10 @@
 
   <mat-form-field class="full-width">
     <mat-label>Tags (separated by comma)</mat-label>
-    <input matInput type="text" [formControl]="tagsControl">
+    <input matInput type="text" formControlName="tags">
+    <mat-error *ngIf="hasError('tags')">
+      {{ getError('tags') }}
+    </mat-error>
   </mat-form-field>
 
   <button

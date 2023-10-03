@@ -1,5 +1,7 @@
 <div class="page-header">
+
   <h1 class="page-title">Blogs</h1>
+
   <a
     mat-flat-button
     color="primary"
@@ -44,10 +46,13 @@
           </button>
         </div>
       </div>
+
       <div class="blog__info">
         Created by {{ blog.authorName }} at {{ formatDateTime(blog.createdAt) }}
       </div>
+
       <div class="blog__content">{{ blog.content }}</div>
+
       <div class="blog__tags">
         <span
           class="blog__tag"
@@ -55,6 +60,7 @@
           #{{tag}}
         </span>
       </div>
+      
     </div>
 
   </div>

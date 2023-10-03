@@ -1,13 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { RubricMapper } from "../core/models/rubric/rubric.mapper";
-import { UserService } from "./user.service";
-import { AppErrorMapper } from "../core/models/app-error/app-error.mapper";
-import { AppConfigService } from "./app-config.service";
-import { Rubric, RubricBase } from "../core/models/rubric/rubric";
-import { NEVER, Observable, catchError, map, throwError } from "rxjs";
-import { RubricDto } from "../core/models/rubric/rubric.dto";
-import { isAppErrorDto } from "../core/models/app-error/app-error.dto";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { RubricMapper } from '../core/models/rubric/rubric.mapper';
+import { UserService } from './user.service';
+import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
+import { AppConfigService } from './app-config.service';
+import { Rubric, RubricBase } from '../core/models/rubric/rubric';
+import { NEVER, Observable, catchError, map, throwError } from 'rxjs';
+import { RubricDto } from '../core/models/rubric/rubric.dto';
+import { isAppErrorDto } from '../core/models/app-error/app-error.dto';
 
 @Injectable({ providedIn: 'root' })
 export class RubricService {
