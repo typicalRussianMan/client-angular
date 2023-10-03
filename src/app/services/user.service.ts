@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Login } from 'src/app/core/models/login/login';
-import { Observable, tap, map, catchError, of, switchMap, throwError, NEVER } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from './app-config.service';
+import { Observable, tap, map, catchError, of, switchMap, throwError, NEVER } from 'rxjs';
+import { Login } from 'src/app/core/models/login/login';
+
 import { LoginMapper } from '../core/models/login/login.mapper';
 import { TokenMapper } from '../core/models/token/token.mapper';
 import { TokenDto } from '../core/models/token/token.dto';
@@ -15,6 +15,7 @@ import { UserDto } from '../core/models/user/user.dto';
 import { UserMapper } from '../core/models/user/user.mapper';
 import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
 
+import { AppConfigService } from './app-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {

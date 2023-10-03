@@ -9,7 +9,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './pages/auth/auth.module';
 import { AdminModule } from './pages/admin/admin.module';
-import { CoreModule } from './core.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
 import { BlogEditFormComponent } from './pages/admin/components/blog-edit-form/blog-edit-form.component';
@@ -33,7 +32,6 @@ import { RubricEditFormComponent } from './pages/admin/components/rubric-edit-fo
     MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    CoreModule,
     AdminModule,
     AuthModule,
   ],

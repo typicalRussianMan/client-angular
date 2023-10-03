@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { TokenService } from '../services/token.service';
 
 /** Interceptor to insert authorization header in http request. */

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material.module';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { MaterialModule } from 'src/app/material.module';
-import { CoreModule } from 'src/app/core.module';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { CommonModule } from '@angular/common';
     AuthRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
-    CoreModule,
   ],
   exports: [AuthComponent]
 })

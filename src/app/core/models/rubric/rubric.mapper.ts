@@ -1,8 +1,10 @@
-import { Injectable } from "@angular/core";
-import { RubricBaseDto, RubricDto } from "./rubric.dto";
-import { Rubric, RubricBase } from "./rubric";
-import { IMapperFromDto } from "../mapper/mapper-from-dto";
-import { IMapperToDto } from "../mapper/mapper-to-dto";
+import { Injectable } from '@angular/core';
+
+import { IMapperFromDto } from '../mapper/mapper-from-dto';
+import { IMapperToDto } from '../mapper/mapper-to-dto';
+
+import { Rubric, RubricBase } from './rubric';
+import { RubricBaseDto, RubricDto } from './rubric.dto';
 
 /** Rubric mapper. */
 @Injectable({ providedIn: 'root' })

@@ -1,7 +1,9 @@
-import { Injectable } from "@angular/core";
-import { IMapperFromDto } from "../mapper/mapper-from-dto";
-import { UserDto } from "./user.dto";
-import { User } from "./user";
+import { Injectable } from '@angular/core';
+
+import { IMapperFromDto } from '../mapper/mapper-from-dto';
+
+import { UserDto } from './user.dto';
+import { User } from './user';
 
 /** User mapper. */
 @Injectable({ providedIn: 'root' })

@@ -1,4 +1,4 @@
-import { BlogDto } from "../blog/blog.dto";
+import { BlogDto } from '../blog/blog.dto';
 
 /** User DTO. */
 export interface UserDto {
