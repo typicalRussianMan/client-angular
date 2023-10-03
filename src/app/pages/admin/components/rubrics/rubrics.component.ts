@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs'
 import { AppError } from 'src/app/core/models/app-error/app-error';
@@ -12,7 +12,8 @@ import { RubricService } from 'src/app/services/rubric.service';
 @Component({
   selector: 'app-rubrics',
   templateUrl: './rubrics.component.html',
-  styleUrls: ['./rubrics.component.css']
+  styleUrls: ['./rubrics.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RubricsComponent {
 

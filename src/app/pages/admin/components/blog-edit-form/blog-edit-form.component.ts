@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs';
@@ -19,7 +19,8 @@ type CreateBlogFormControls = FlatControlsOf<EditBlogForm>
 @Component({
   selector: 'app-blog-edit-form',
   templateUrl: './blog-edit-form.component.html',
-  styleUrls: ['./blog-edit-form.component.css']
+  styleUrls: ['./blog-edit-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> implements OnInit {
 
