@@ -1,0 +1,15 @@
+<h1 class="page-title">Tags</h1>
+
+<ng-container *ngIf="tags$ | async as tags">
+
+  <div *ngIf="tags.length > 0">
+
+    <ng-container *ngFor="let tag of tags">
+
+      <mat-divider />
+      <div class="tag">{{ tag.name }}</div>
+
+    </ng-container>
+    
+  </div>
+</ng-container>

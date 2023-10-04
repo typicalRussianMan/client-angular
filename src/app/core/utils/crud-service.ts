@@ -4,6 +4,7 @@ import { AppConfigService } from 'src/app/services/app-config.service';
 
 import { AppErrorMapper } from '../models/app-error/app-error.mapper';
 import { isAppErrorDto } from '../models/app-error/app-error.dto';
+import { inject } from '@angular/core';
 
 /**
  * Creates class with CRUD methods.
@@ -20,12 +21,14 @@ export function CrudService<
 
     private readonly routeUrlWithId = (id: any) => `${this.routeUrl}/${id}`;
 
-    public constructor(
-      private readonly http: HttpClient,
-      private readonly errorMapper: AppErrorMapper,
-      appConfig: AppConfigService,
-    ) {
-      this.routeUrl = new URL(route, appConfig.apiUrl);
+    private readonly http = inject(HttpClient);
+
+    private readonly errorMapper = inject(AppErrorMapper);
+
+    private readonly appConfig = inject(AppConfigService);
+
+    public constructor() {
+      this.routeUrl = new URL(route, this.appConfig.apiUrl);
     }
 
     private handleError(error: unknown): Observable<never> {

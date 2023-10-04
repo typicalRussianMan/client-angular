@@ -1,25 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { RubricMapper } from '../core/models/rubric/rubric.mapper';
-import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
 import { Rubric, RubricBase } from '../core/models/rubric/rubric';
 import { RubricBaseDto, RubricDto } from '../core/models/rubric/rubric.dto';
 import { CrudService } from '../core/utils/crud-service';
-
-import { AppConfigService } from './app-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class RubricService extends CrudService<RubricDto, RubricBaseDto>('rubrics') {
 
   public constructor(
     private readonly rubricMapper: RubricMapper,
-    http: HttpClient,
-    errorMapper: AppErrorMapper,
-    appConfig: AppConfigService,
   ) {
-    super(http, errorMapper, appConfig);
+    super();
   }
 
   /** Gets all rubrics. */
