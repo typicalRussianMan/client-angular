@@ -20,11 +20,6 @@ import { TagsComponent } from './pages/admin/components/tags/tags.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BlogsComponent,
-    BlogEditFormComponent,
-    RubricsComponent,
-    RubricEditFormComponent,
-    TagsComponent,
   ],
   imports: [
     BrowserModule,
