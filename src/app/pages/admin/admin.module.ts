@@ -10,6 +10,7 @@ import { BlogsComponent } from './components/blogs/blogs.component';
 import { BlogEditFormComponent } from './components/blog-edit-form/blog-edit-form.component';
 import { RubricsComponent } from './components/rubrics/rubrics.component';
 import { RubricEditFormComponent } from './components/rubric-edit-form/rubric-edit-form.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RubricEditFormComponent } from './components/rubric-edit-form/rubric-ed
     BlogEditFormComponent,
     RubricsComponent,
     RubricEditFormComponent,
+    TagsComponent,
   ],
   imports: [
     CommonModule,

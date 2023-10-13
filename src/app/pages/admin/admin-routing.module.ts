@@ -5,6 +5,7 @@ import { BlogEditFormComponent } from './components/blog-edit-form/blog-edit-for
 import { RubricsComponent } from './components/rubrics/rubrics.component';
 import { RubricEditFormComponent } from './components/rubric-edit-form/rubric-edit-form.component';
 import { AdminComponent } from './admin.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
             component: RubricEditFormComponent,
           },
         ],
+      },
+      {
+        path: 'tags',
+        component: TagsComponent,
       },
       {
         path: '**',

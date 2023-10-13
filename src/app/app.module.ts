@@ -15,6 +15,7 @@ import { BlogEditFormComponent } from './pages/admin/components/blog-edit-form/b
 import { ReactiveFormsModule } from '@angular/forms';
 import { RubricsComponent } from './pages/admin/components/rubrics/rubrics.component';
 import { RubricEditFormComponent } from './pages/admin/components/rubric-edit-form/rubric-edit-form.component';
+import { TagsComponent } from './pages/admin/components/tags/tags.component';
 
 @NgModule({
   declarations: [
