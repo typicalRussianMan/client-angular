@@ -1,22 +1,19 @@
 <div class="page-header">
-
   <h1 class="page-title">Blogs</h1>
-
   <a
     mat-flat-button
     color="primary"
     routerLink="./new">
     + New
   </a>
-
 </div>
 
 
-<ng-container *ngIf="blogs$ | async as blogs">
+<ng-container *ngIf="blogs$ | async as blogs; else loading">
 
   <div
     class="blog-container"
-    *ngIf="blogs.length > 0">
+    *ngIf="blogs.length > 0; else noBlogs">
 
     <div
       class="blog"
@@ -57,12 +54,20 @@
         <span
           class="blog__tag"
           *ngFor="let tag of blog.tags; trackBy: trackByTag">
-          #{{tag}}
+          #{{tag.name}}
         </span>
       </div>
-      
+
     </div>
 
   </div>
 
 </ng-container>
+
+<ng-template #loading>
+  <app-loading />
+</ng-template>
+
+<ng-template #noBlogs>
+  <div>There's no blogs to display</div>
+</ng-template>

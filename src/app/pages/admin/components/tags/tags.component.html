@@ -1,8 +1,8 @@
 <h1 class="page-title">Tags</h1>
 
-<ng-container *ngIf="tags$ | async as tags">
+<ng-container *ngIf="tags$ | async as tags; else loading">
 
-  <div *ngIf="tags.length > 0">
+  <div *ngIf="tags.length > 0; else noTags">
 
     <ng-container *ngFor="let tag of tags">
 
@@ -10,6 +10,14 @@
       <div class="tag">{{ tag.name }}</div>
 
     </ng-container>
-    
+
   </div>
 </ng-container>
+
+<ng-template #loading>
+  <app-loading />
+</ng-template>
+
+<ng-template #noTags>
+  <div>There's no tags to display</div>
+</ng-template>

@@ -1,3 +1,4 @@
+import { TagDto } from "../tag/tag.dto";
 
 /** Blog base DTO. */
 export interface BlogBaseDto {
@@ -12,7 +13,7 @@ export interface BlogBaseDto {
   readonly rubric: string | null;
 
   /** Tags. */
-  readonly tags: readonly string[];
+  readonly tags: readonly TagDto[];
 }
 
 /** Blog DTO. */

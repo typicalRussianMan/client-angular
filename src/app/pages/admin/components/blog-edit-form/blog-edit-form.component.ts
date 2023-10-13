@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, NEVER, catchError, switchMap, tap, of } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { BlogBase } from 'src/app/core/models/blog/blog';
@@ -27,6 +27,8 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
   /** Page title. */
   protected readonly title$ = new BehaviorSubject<string | null>(null);
 
+  protected readonly isLoading$ = new BehaviorSubject(false);
+
   private readonly id$ = new BehaviorSubject<string | null>(null);
 
   protected readonly form = this.fb.group<CreateBlogFormControls>({
@@ -49,6 +51,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
   /** @inheritdoc */
   public ngOnInit(): void {
     this.route.params.pipe(
+      tap(() => this.isLoading$.next(true)),
       switchMap(params => {
         const id = params['id'];
 
@@ -67,12 +70,13 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
                 content: blog.content,
                 rubric: blog.rubric,
                 title: blog.title,
-                tags: blog.tags.join(','),
+                tags: blog.tags.map(e => e.name).join(','),
               });
             }),
             catchError(() => this.router.navigate(['/'])),
           )
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
     )
       .subscribe()
@@ -88,6 +92,8 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
 
     const formData = this.form.getRawValue();
 
+    this.isLoading$.next(true);
+
     const tags = formData.tags
       .split(',')
       .map(item => item.trim())
@@ -97,7 +103,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
       content: formData.content.trim(),
       title: formData.title.trim(),
       rubric: formData.rubric?.trim() ?? null,
-      tags,
+      tags: tags as any,
     })
 
     this.id$.pipe(
@@ -113,9 +119,9 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
       }),
       catchError((err: AppError) => {
         this.notification.showAppError(err);
-
-        return NEVER;
+        return of(void 0);
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
     ).subscribe();
   }

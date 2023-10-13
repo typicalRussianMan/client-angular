@@ -16,6 +16,7 @@ import { UserMapper } from '../core/models/user/user.mapper';
 import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
 
 import { AppConfigService } from './app-config.service';
+import { AppError } from '../core/models/app-error/app-error';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -85,7 +86,7 @@ export class UserService {
           return throwError(this.appErrorMapper.fromDto(err));
         }
 
-        return NEVER;
+        return throwError(this.appErrorMapper.fromHttpErrorResponse(err));
       })
     );
   }

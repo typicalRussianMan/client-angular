@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 
 import { AuthComponent } from './auth.component';
+import { CoreModule } from 'src/app/core.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AuthComponent } from './auth.component';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    CoreModule,
   ],
   exports: [AuthComponent]
 })

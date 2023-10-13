@@ -6,6 +6,7 @@ import { IMapperToDto } from '../mapper/mapper-to-dto';
 
 import { Blog, BlogBase } from './blog';
 import { BlogBaseDto, BlogDto } from './blog.dto';
+import { TagMapper } from '../tag/tag.mapper';
 
 /** Blog mapper. */
 @Injectable({ providedIn: 'root' })
@@ -13,6 +14,10 @@ export class BlogMapper implements
   IMapperFromDto<BlogDto, Blog>,
   IMapperToDto<BlogBase, BlogBaseDto>
 {
+
+  public constructor(
+    private readonly tagMapper: TagMapper,
+  ) {}
 
   /** @inheritdoc */
   public fromDto(dto: BlogDto): Blog {

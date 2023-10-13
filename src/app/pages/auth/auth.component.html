@@ -29,9 +29,14 @@
         </mat-error>
       </mat-form-field>
       <button class="submit-button" color="primary" mat-raised-button type="button" (click)="insertCredentials()">Insert credentials</button>
-      <button class="submit-button" color="primary" mat-raised-button type="submit">Log In</button>
+      <button
+        class="submit-button"
+        color="primary"
+        mat-raised-button
+        type="submit"
+        [disabled]="isLoading$ | async">
+        Log In
+      </button>
     </form>
   </mat-card-content>
-
-
 </mat-card>

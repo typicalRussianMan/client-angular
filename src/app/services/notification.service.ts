@@ -24,6 +24,6 @@ export class NotificationService {
    * @param error App error.
    */
   public showAppError(error: AppError): void {
-    this.showMessage(error.message);
+    this.showMessage(`${error.title}: ${error.message}`);
   }
 }
