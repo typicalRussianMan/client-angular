@@ -48,7 +48,8 @@
   <button
     mat-raised-button
     color="primary"
-    type="submit">
+    type="submit"
+    [disabled]="isLoading$ | async">
     Submit
   </button>
 

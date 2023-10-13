@@ -5,6 +5,7 @@ import { AppConfigService } from 'src/app/services/app-config.service';
 import { AppErrorMapper } from '../models/app-error/app-error.mapper';
 import { isAppErrorDto } from '../models/app-error/app-error.dto';
 import { inject } from '@angular/core';
+import { AppError } from '../models/app-error/app-error';
 
 /**
  * Creates class with CRUD methods.
@@ -31,12 +32,12 @@ export function CrudService<
       this.routeUrl = new URL(route, this.appConfig.apiUrl);
     }
 
-    private handleError(error: unknown): Observable<never> {
+    private handleError(error: any): Observable<never> {
       if (isAppErrorDto(error)) {
         return throwError(this.errorMapper.fromDto(error));
       }
 
-      return NEVER;
+      return throwError(this.errorMapper.fromHttpErrorResponse(error));
     }
 
     protected create(data: TDtoToHttp): Observable<void> {

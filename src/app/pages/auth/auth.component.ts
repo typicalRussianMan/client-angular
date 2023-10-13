@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NEVER, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, of, tap } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Login } from 'src/app/core/models/login/login';
@@ -22,6 +22,8 @@ type AuthFormControls = FlatControlsOf<Login>;
 })
 export class AuthComponent extends AbstractFormComponent<Login> {
 
+  protected isLoading$ = new BehaviorSubject(false);
+
   protected readonly form = this.fb.group<AuthFormControls>({
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', Validators.required),
@@ -34,6 +36,8 @@ export class AuthComponent extends AbstractFormComponent<Login> {
     private readonly router: Router,
   ) {
     super();
+
+    this.isLoading$.subscribe(console.log)
   }
 
   protected insertCredentials(): void {
@@ -54,16 +58,20 @@ export class AuthComponent extends AbstractFormComponent<Login> {
       return;
     }
 
+    this.isLoading$.next(true);
+
     this.userService.signIn(new Login(form.getRawValue())).pipe(
       tap(() => {
         this.router.navigate(['/']);
       }),
       catchError((err: AppError) => {
         this.notificationService.showAppError(err);
-
-        return NEVER;
+        return of(undefined);
       }),
       takeUntilDestroy(this),
-    ).subscribe();
+    ).subscribe({
+      error: () => this.isLoading$.next(false),
+      next: () => this.isLoading$.next(false),
+    });
   }
 }

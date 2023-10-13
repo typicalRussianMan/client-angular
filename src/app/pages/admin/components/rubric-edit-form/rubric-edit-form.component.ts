@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, NEVER, catchError, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, NEVER, catchError, map, switchMap, tap, of } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { RubricBase } from 'src/app/core/models/rubric/rubric';
@@ -27,6 +27,8 @@ export class RubricEditFormComponent
   /** Page title. */
   protected readonly title$ = new BehaviorSubject<string | null>(null);
 
+  protected isLoading$ = new BehaviorSubject(false);
+
   private readonly id$ = new BehaviorSubject<string | null>(null);
 
   protected readonly form = this.fb.group<FormControls>({
@@ -45,12 +47,13 @@ export class RubricEditFormComponent
 
   public ngOnInit(): void {
     this.route.params.pipe(
+      tap(() => this.isLoading$.next(true)),
       switchMap(params => {
         const id = params['id'];
 
         if (id === undefined) {
           this.title$.next('New rubric');
-          return NEVER;
+          return of(void 0);
         }
 
         return this.rubricService.getRubrics()
@@ -66,6 +69,7 @@ export class RubricEditFormComponent
             catchError(() => this.router.navigate(['/'])),
           )
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
     )
       .subscribe()
@@ -79,6 +83,8 @@ export class RubricEditFormComponent
     }
 
     const formData = this.form.getRawValue();
+
+    this.isLoading$.next(true);
 
     const rubric: RubricBase = {
       name: formData.name,
@@ -103,8 +109,9 @@ export class RubricEditFormComponent
       catchError((err: AppError) => {
         this.notification.showAppError(err);
 
-        return NEVER;
+        return of(void 0);
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
     ).subscribe();
   }

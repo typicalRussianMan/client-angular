@@ -10,12 +10,7 @@ import { CommonModule } from '@angular/common';
 import { AuthModule } from './pages/auth/auth.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { BlogsComponent } from './pages/admin/components/blogs/blogs.component';
-import { BlogEditFormComponent } from './pages/admin/components/blog-edit-form/blog-edit-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RubricsComponent } from './pages/admin/components/rubrics/rubrics.component';
-import { RubricEditFormComponent } from './pages/admin/components/rubric-edit-form/rubric-edit-form.component';
-import { TagsComponent } from './pages/admin/components/tags/tags.component';
 
 @NgModule({
   declarations: [

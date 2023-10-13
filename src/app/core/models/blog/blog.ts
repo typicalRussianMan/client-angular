@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+import { Tag } from '../tag/tag';
 
 /** Blog base. */
 export class BlogBase {
@@ -13,7 +14,7 @@ export class BlogBase {
   readonly rubric: string | null;
 
   /** Tags. */
-  readonly tags: readonly string[];
+  readonly tags: readonly Tag[];
 
   public constructor(data: BlogBase) {
     this.content = data.content;

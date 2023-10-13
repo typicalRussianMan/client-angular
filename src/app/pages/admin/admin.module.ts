@@ -11,6 +11,7 @@ import { BlogEditFormComponent } from './components/blog-edit-form/blog-edit-for
 import { RubricsComponent } from './components/rubrics/rubrics.component';
 import { RubricEditFormComponent } from './components/rubric-edit-form/rubric-edit-form.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { CoreModule } from 'src/app/core.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TagsComponent } from './components/tags/tags.component';
     AdminRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
+    CoreModule,
   ]
 })
 export class AdminModule { }

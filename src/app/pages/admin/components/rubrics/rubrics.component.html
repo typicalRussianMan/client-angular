@@ -11,9 +11,9 @@
 
 </div>
 
-<ng-container *ngIf="rubrics$ | async as rubrics">
+<ng-container *ngIf="rubrics$ | async as rubrics; else loading">
 
-  <div *ngIf="rubrics.length > 0">
+  <div *ngIf="rubrics.length > 0; else noRubrics">
 
     <ng-container *ngFor="let rubric of rubrics; trackBy: trackByRubric">
 
@@ -45,3 +45,11 @@
   </div>
 
 </ng-container>
+
+<ng-template #loading>
+  <app-loading />
+</ng-template>
+
+<ng-template #noRubrics>
+  <div>There's no rubrics to display</div>
+</ng-template>
