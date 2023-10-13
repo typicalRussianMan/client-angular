@@ -18,6 +18,10 @@ export class AppErrorMapper implements IMapperFromDto<AppErrorDto, AppError> {
     });
   }
 
+  /**
+   * Maps http error response to App error.
+   * @param error Http error response.
+   */
   public fromHttpErrorResponse(error: HttpErrorResponse): AppError {
     return new AppError({
       message: error.message,

@@ -67,9 +67,8 @@ export class AuthComponent extends AbstractFormComponent<Login> {
         return of(undefined);
       }),
       takeUntilDestroy(this),
+      tap(() => this.isLoading$.next(false))
     ).subscribe({
-      error: () => this.isLoading$.next(false),
-      next: () => this.isLoading$.next(false),
     });
   }
 }
