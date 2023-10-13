@@ -51,6 +51,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
   /** @inheritdoc */
   public ngOnInit(): void {
     this.route.params.pipe(
+      tap(() => this.isLoading$.next(true)),
       switchMap(params => {
         const id = params['id'];
 
@@ -75,6 +76,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
             catchError(() => this.router.navigate(['/'])),
           )
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
     )
       .subscribe()

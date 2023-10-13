@@ -30,6 +30,8 @@ export function CrudService<
 
     public constructor() {
       this.routeUrl = new URL(route, this.appConfig.apiUrl);
+
+      this.handleError = this.handleError.bind(this);
     }
 
     private handleError(error: any): Observable<never> {

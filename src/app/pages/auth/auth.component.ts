@@ -36,8 +36,6 @@ export class AuthComponent extends AbstractFormComponent<Login> {
     private readonly router: Router,
   ) {
     super();
-
-    this.isLoading$.subscribe(console.log)
   }
 
   protected insertCredentials(): void {

@@ -27,7 +27,7 @@ export class RubricEditFormComponent
   /** Page title. */
   protected readonly title$ = new BehaviorSubject<string | null>(null);
 
-  protected isLoading$ = new BehaviorSubject(false);
+  protected readonly isLoading$ = new BehaviorSubject(false);
 
   private readonly id$ = new BehaviorSubject<string | null>(null);
 

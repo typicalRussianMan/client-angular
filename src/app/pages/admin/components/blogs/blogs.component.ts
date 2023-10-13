@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DateTime } from 'luxon';
-import { BehaviorSubject, NEVER, Observable, catchError, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, NEVER, Observable, catchError, of, switchMap, tap } from 'rxjs';
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Blog } from 'src/app/core/models/blog/blog';
 import { trackById, trackByValue } from 'src/app/core/utils/angular/track-by';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { BlogService } from 'src/app/services/blog.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 /** Blogs component. */
 @Destroyable()
@@ -27,10 +28,17 @@ export class BlogsComponent {
   public constructor(
     private readonly blogService: BlogService,
     private readonly router: Router,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly userService: UserService,
   ) {
     this.blogs$ = this.updateBlogEffect$.pipe(
       switchMap(() => blogService.getBlogs()),
+      catchError((e: AppError) => {
+        this.notificationService.showAppError(e);
+        this.userService.logout();
+
+        return NEVER;
+      })
     );
   }
 
@@ -64,7 +72,7 @@ export class BlogsComponent {
         catchError((err: AppError) => {
           this.notificationService.showAppError(err);
 
-          return NEVER;
+          return of(void 0);
         }),
         takeUntilDestroy(this),
       ).subscribe();

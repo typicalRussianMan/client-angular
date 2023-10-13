@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, NEVER, catchError, switchMap, tap } from 'rxjs'
+import { BehaviorSubject, NEVER, catchError, of, switchMap, tap } from 'rxjs'
 import { AppError } from 'src/app/core/models/app-error/app-error';
 import { Rubric } from 'src/app/core/models/rubric/rubric';
 import { trackById } from 'src/app/core/utils/angular/track-by';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { NotificationService } from 'src/app/services/notification.service';
 import { RubricService } from 'src/app/services/rubric.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Destroyable()
 @Component({
@@ -22,12 +23,18 @@ export class RubricsComponent {
   /** Rubrics. */
   protected readonly rubrics$ = this.updateRubricEffect$.pipe(
     switchMap(() => this.rubricService.getRubrics()),
+    catchError((e: AppError) => {
+      this.notificationService.showAppError(e);
+      this.userService.logout();
+      return NEVER;
+    })
   );
 
   public constructor(
     private readonly rubricService: RubricService,
     private readonly router: Router,
     private readonly notificationService: NotificationService,
+    private readonly userService: UserService,
   ) {}
 
   protected trackByRubric = trackById<Rubric>();
@@ -43,7 +50,7 @@ export class RubricsComponent {
         catchError((err: AppError) => {
           this.notificationService.showAppError(err);
 
-          return NEVER;
+          return of(void 0);
         }),
         takeUntilDestroy(this),
       ).subscribe();
