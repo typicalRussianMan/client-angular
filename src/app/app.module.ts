@@ -19,10 +19,6 @@ import { RubricEditFormComponent } from './pages/admin/components/rubric-edit-fo
 @NgModule({
   declarations: [
     AppComponent,
-    BlogsComponent,
-    BlogEditFormComponent,
-    RubricsComponent,
-    RubricEditFormComponent,
   ],
   imports: [
     BrowserModule,

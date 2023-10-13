@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 
-import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 
 @NgModule({
@@ -12,7 +11,6 @@ import { AuthComponent } from './auth.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
   ],
