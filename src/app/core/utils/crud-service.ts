@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { NEVER, Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { AppConfigService } from 'src/app/services/app-config.service';
 
 import { AppErrorMapper } from '../models/app-error/app-error.mapper';

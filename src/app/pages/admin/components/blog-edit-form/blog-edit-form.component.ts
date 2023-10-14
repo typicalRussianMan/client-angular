@@ -57,7 +57,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
 
         if (id === undefined) {
           this.title$.next('New blog');
-          return NEVER;
+          return of(void 0);
         }
 
         this.title$.next('Edit Blog');
@@ -70,10 +70,14 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
                 content: blog.content,
                 rubric: blog.rubric,
                 title: blog.title,
-                tags: blog.tags.map(e => e.name).join(','),
+                tags: blog.tags.map(e => e.name).join(', '),
               });
             }),
-            catchError(() => this.router.navigate(['/'])),
+            catchError((err: AppError) => {
+              this.notification.showAppError(err);
+              
+              return this.router.navigate(['/'])
+            }),
           )
       }),
       tap(() => this.isLoading$.next(false)),

@@ -19,7 +19,7 @@ export class BlogService extends CrudService<BlogDto, BlogToCreate>('blogs') {
   public getBlogs(): Observable<readonly Blog[]> {
     return this.getAll()
       .pipe(
-        map(blogs => blogs.map(this.blogMapper.fromDto)),
+        map(blogs => blogs.map(blog => this.blogMapper.fromDto(blog))),
       );
   }
 
@@ -47,7 +47,7 @@ export class BlogService extends CrudService<BlogDto, BlogToCreate>('blogs') {
   public getBlog(id: Blog['id']): Observable<Blog> {
     return this.getById(id)
       .pipe(
-        map(this.blogMapper.fromDto),
+        map(blog => this.blogMapper.fromDto(blog)),
       );
   }
 
