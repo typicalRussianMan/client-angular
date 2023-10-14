@@ -1,3 +1,4 @@
+import { StrictOmit } from "../../utils/types/strict-omit";
 import { TagDto } from "../tag/tag.dto";
 
 /** Blog base DTO. */
@@ -11,9 +12,6 @@ export interface BlogBaseDto {
 
   /** Rubric. */
   readonly rubric: string | null;
-
-  /** Tags. */
-  readonly tags: readonly TagDto[];
 }
 
 /** Blog DTO. */
@@ -27,5 +25,15 @@ export interface BlogDto extends BlogBaseDto {
 
   /** Date string when blog was created. */
   readonly createdAt: string;
+
+  /** Tags. */
+  readonly tags: readonly TagDto[];
+}
+
+/** Blog  */
+export interface BlogToCreateDto extends BlogBaseDto {
+
+  /** Tags. */
+  readonly tags: readonly string[];
 }
 

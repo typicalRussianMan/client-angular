@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, NEVER, catchError, switchMap, tap, of } from 'rxjs';
 import { AbstractFormComponent } from 'src/app/components/abstract-form/abstract-form.component';
 import { AppError } from 'src/app/core/models/app-error/app-error';
-import { BlogBase } from 'src/app/core/models/blog/blog';
+import { BlogBase, BlogToCreate } from 'src/app/core/models/blog/blog';
 import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { FlatControlsOf } from 'src/app/core/utils/forms/controls';
 import { StrictOmit } from 'src/app/core/utils/types/strict-omit';
 import { BlogService } from 'src/app/services/blog.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
-type EditBlogForm = StrictOmit<BlogBase, 'tags'> & { tags: string };
+type EditBlogForm = StrictOmit<BlogToCreate, 'tags'> & { tags: string };
 
 type CreateBlogFormControls = FlatControlsOf<EditBlogForm>
 
@@ -57,7 +57,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
 
         if (id === undefined) {
           this.title$.next('New blog');
-          return NEVER;
+          return of(void 0);
         }
 
         this.title$.next('Edit Blog');
@@ -70,10 +70,14 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
                 content: blog.content,
                 rubric: blog.rubric,
                 title: blog.title,
-                tags: blog.tags.map(e => e.name).join(','),
+                tags: blog.tags.map(e => e.name).join(', '),
               });
             }),
-            catchError(() => this.router.navigate(['/'])),
+            catchError((err: AppError) => {
+              this.notification.showAppError(err);
+              
+              return this.router.navigate(['/'])
+            }),
           )
       }),
       tap(() => this.isLoading$.next(false)),
@@ -99,7 +103,7 @@ export class BlogEditFormComponent extends AbstractFormComponent<EditBlogForm> i
       .map(item => item.trim())
       .filter(Boolean);
 
-    const blog = new BlogBase({
+    const blog = new BlogToCreate({
       content: formData.content.trim(),
       title: formData.title.trim(),
       rubric: formData.rubric?.trim() ?? null,
