@@ -66,9 +66,9 @@ export class AuthComponent extends AbstractFormComponent<Login> {
         this.notificationService.showAppError(err);
         return of(undefined);
       }),
+      tap(() => this.isLoading$.next(false)),
       takeUntilDestroy(this),
-      tap(() => this.isLoading$.next(false))
-    ).subscribe({
-    });
+    )
+      .subscribe();
   }
 }

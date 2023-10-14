@@ -1,0 +1,14 @@
+.auth-container {
+  width: 50%;
+  margin: auto;
+}
+
+.title {
+  font-size: var(--font-size-l);
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  width: 100%;
+  margin-bottom: 10px;
+}

@@ -63,7 +63,6 @@ export class UserService {
       .pipe(
         map(this.userMapper.fromDto),
         catchError(e => {
-          this.logout();
           return of(null);
         }),
       );

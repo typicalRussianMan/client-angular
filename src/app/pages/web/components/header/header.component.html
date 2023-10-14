@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <div class="container">
+    <span>Blogs Web App</span>
+    <div class="controls">
+      <button
+        mat-icon-button
+        *ngIf="isLoggedIn$ | async; else login"
+        [mat-menu-trigger-for]="menu">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/app/profile">
+        <mat-icon>account_circle</mat-icon> My Account
+      </a>
+      <a mat-menu-item routerLink="/admin">
+        <mat-icon>table_chart</mat-icon> Admin App
+      </a>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon> Logout
+      </button>
+    </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
+
+<ng-template #login>
+  <a
+    mat-icon-button
+    color="basic"
+    routerLink="/auth/web">
+    <mat-icon>input</mat-icon>
+  </a>
+</ng-template>
+
