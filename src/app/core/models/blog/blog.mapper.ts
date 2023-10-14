@@ -4,15 +4,15 @@ import { DateTime } from 'luxon';
 import { IMapperFromDto } from '../mapper/mapper-from-dto';
 import { IMapperToDto } from '../mapper/mapper-to-dto';
 
-import { Blog, BlogBase } from './blog';
-import { BlogBaseDto, BlogDto } from './blog.dto';
+import { Blog, BlogBase, BlogToCreate } from './blog';
+import { BlogBaseDto, BlogToCreateDto, BlogDto } from './blog.dto';
 import { TagMapper } from '../tag/tag.mapper';
 
 /** Blog mapper. */
 @Injectable({ providedIn: 'root' })
 export class BlogMapper implements
   IMapperFromDto<BlogDto, Blog>,
-  IMapperToDto<BlogBase, BlogBaseDto>
+  IMapperToDto<BlogToCreateDto, BlogToCreate>
 {
 
   public constructor(
@@ -28,12 +28,12 @@ export class BlogMapper implements
       id: dto.id,
       title: dto.title,
       rubric: dto.rubric,
-      tags: dto.tags,
+      tags: dto.tags.map(tag => this.tagMapper.fromDto(tag)),
     });
   }
 
   /** @inheritdoc */
-  public toDto(model: BlogBase): BlogBaseDto {
+  public toDto(model: BlogToCreate): BlogToCreateDto {
     return {
       content: model.content,
       title: model.title,
