@@ -1,0 +1,37 @@
+.icon {
+  transform: scale(1.5);
+}
+
+.blog {
+  margin-block: 20px;
+}
+
+.blog__author {
+  font-weight: 700;
+}
+
+.blog__created {
+  color: #777;
+}
+
+.blog__title {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+.blog__content {
+  margin-top: 5px;
+}
+
+.blog__footer {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 3px;
+  color: #fff;
+  background-color: #2a92d8cc;
+  border-radius: 3px;
+}

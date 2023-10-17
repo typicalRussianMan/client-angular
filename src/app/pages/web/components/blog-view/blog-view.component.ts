@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Blog } from 'src/app/core/models/blog/blog';
-import { Destroyable } from 'src/app/core/utils/destroyable';
+import { Destroyable, takeUntilDestroy } from 'src/app/core/utils/destroyable';
 import { BlogService } from 'src/app/services/blog.service';
 
 @Destroyable()
@@ -15,15 +15,7 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class BlogViewComponent implements OnInit {
 
-  protected blog$ = new BehaviorSubject<null | Blog>({
-    authorName: 'Andrey123',
-    content: 'Qwertyqiquirgbeiuerg',
-    createdAt: DateTime.now(),
-    id :2,
-    rubric: 'Kittens',
-    tags: [{ name: 'Test' }, { name: 'Tes123' }, { name: 'Qwerty' }],
-    title: 'Test blog'
-  });
+  protected blog$ = new BehaviorSubject<null | Blog>(null);
 
   public constructor(
     private readonly route: ActivatedRoute,
@@ -36,7 +28,9 @@ export class BlogViewComponent implements OnInit {
 
     this.blogService.getBlog(id).pipe(
       tap(blog => this.blog$.next(blog)),
+      takeUntilDestroy(this),
     )
+      .subscribe();
   }
 
   protected createdAt(dateTime: DateTime): string {

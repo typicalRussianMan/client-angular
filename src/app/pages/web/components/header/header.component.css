@@ -4,3 +4,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.heading {
+  color: #fff;
+  text-decoration: none;
+}

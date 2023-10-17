@@ -6,6 +6,7 @@ import { AppErrorMapper } from '../models/app-error/app-error.mapper';
 import { isAppErrorDto } from '../models/app-error/app-error.dto';
 import { inject } from '@angular/core';
 import { AppError } from '../models/app-error/app-error';
+import { ApiMockService } from 'src/app/services/api-mock.service';
 
 /**
  * Creates class with CRUD methods.
@@ -22,11 +23,14 @@ export function CrudService<
 
     private readonly routeUrlWithId = (id: any) => `${this.routeUrl}/${id}`;
 
-    private readonly http = inject(HttpClient);
-
     private readonly errorMapper = inject(AppErrorMapper);
 
     private readonly appConfig = inject(AppConfigService);
+
+    private readonly http = inject(this.appConfig.isMockMode
+      ? ApiMockService
+      : HttpClient
+    );
 
     public constructor() {
       this.routeUrl = new URL(route, this.appConfig.apiUrl);
@@ -38,7 +42,6 @@ export function CrudService<
       if (isAppErrorDto(error)) {
         return throwError(this.errorMapper.fromDto(error));
       }
-
       return throwError(this.errorMapper.fromHttpErrorResponse(error));
     }
 

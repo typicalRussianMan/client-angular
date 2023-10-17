@@ -9,6 +9,8 @@ import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BlogPreviewComponent } from './components/blog-preview/blog-preview.component';
 import { BlogViewComponent } from './components/blog-view/blog-view.component';
+import { HttpClient } from '@angular/common/http';
+import { ApiMockService } from 'src/app/services/api-mock.service';
 
 @NgModule({
   declarations: [
@@ -25,5 +27,11 @@ import { BlogViewComponent } from './components/blog-view/blog-view.component';
     MaterialModule,
     CoreModule,
   ],
+  providers: [
+    {
+      provide: HttpClient,
+      useClass: ApiMockService,
+    }
+  ]
 })
 export class WebModule { }

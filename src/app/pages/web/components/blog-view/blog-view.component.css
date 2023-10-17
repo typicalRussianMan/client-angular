@@ -23,7 +23,7 @@
   margin-top: 5px;
 }
 
-.blog__footer {
+.blog__tags {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;

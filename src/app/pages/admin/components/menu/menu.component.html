@@ -3,12 +3,21 @@
 
   <div class="user-info" *ngIf="user$ | async as user">Login as: {{ user.name }}</div>
 
-  <button
-    (click)="onLogoutClick()"
-    mat-raised-button
-    color="primary">
-    Logout
-  </button>
+  <div class="row">
+    <button
+      (click)="onLogoutClick()"
+      mat-raised-button
+      color="primary">
+      Logout
+    </button>
+    
+    <a
+      routerLink="/app"
+      mat-raised-button
+      color="primary">
+      Field App
+    </a>
+  </div>
 
 </div>
 

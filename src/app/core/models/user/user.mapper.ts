@@ -12,7 +12,9 @@ export class UserMapper implements IMapperFromDto<UserDto, User> {
 
   public constructor(
     private readonly blogMapper: BlogMapper,
-  ) {}
+  ) {
+    this.fromDto = this.fromDto.bind(this);
+  }
 
   /** @inheritdoc */
   fromDto(dto: UserDto): User {

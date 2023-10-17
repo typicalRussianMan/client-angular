@@ -19,7 +19,7 @@ export class TagService extends CrudService<TagDto, {}>('tags') {
   /** Gets all tags. */
   public getTags(): Observable<readonly Tag[]> {
     return this.getAll().pipe(
-      map(tags => tags.map(this.tagMapper.fromDto)),
+      map(tags => tags.map(tag => this.tagMapper.fromDto(tag))),
     );
   }
 }
