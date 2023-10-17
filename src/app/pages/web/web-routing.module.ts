@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { BlogListComponent } from "./components/blog-list/blog-list.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AuthGuard } from "src/app/guards/auth.guard";
+import { BlogViewComponent } from "./components/blog-view/blog-view.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
             path: '',
             component: BlogListComponent,
           },
+          {
+            path: ':id',
+            component: BlogViewComponent,
+          }
         ],
       },
       {

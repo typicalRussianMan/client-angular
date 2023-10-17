@@ -7,6 +7,8 @@ import { CoreModule } from 'src/app/core.module';
 import { HeaderComponent } from './components/header/header.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BlogPreviewComponent } from './components/blog-preview/blog-preview.component';
+import { BlogViewComponent } from './components/blog-view/blog-view.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     HeaderComponent,
     BlogListComponent,
     ProfileComponent,
+    BlogPreviewComponent,
+    BlogViewComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,32 @@
+<div class="blog">
+  <div class="blog__header">
+    <div class="row">
+      <mat-icon class="icon">account_circle</mat-icon>
+
+      <div class="blog__info">
+        <div class="blog__author">{{ blog.authorName }}</div>
+        <div class="blog__created">
+          Created at {{ createdAt(blog.createdAt) }}
+        </div>
+      </div>
+    </div>
+    <h2 class="blog__title">{{ blog.title }}</h2>
+    <span>Rubric: {{ blog.rubric }}</span>
+  </div>
+
+  <div class="blog__content">
+    {{ content }}
+  </div>
+
+  <div class="blog__footer">
+    <span *ngFor="let tag of blog.tags" class="tag">#{{ tag.name }}</span>
+  </div>
+
+  <a
+    mat-button
+    color="primary"
+    [routerLink]="['/', 'app', 'blogs', blog.id]">
+    Read more
+    <mat-icon>open_in_new</mat-icon>
+  </a>
+</div>

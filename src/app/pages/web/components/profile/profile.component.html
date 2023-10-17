@@ -1,1 +1,16 @@
-<p>profile works!</p>
+
+<ng-container *ngIf="user$ | async as user">
+
+  <div class="user">
+    <h2>{{ user.name }} ({{ user.email }})</h2>
+  </div>
+
+  <div class="blogs">
+    <h2>Your blogs</h2>
+
+    <app-blog-preview
+      *ngFor="let blog of user.blogs; trackBy: trackByBlog"
+      [blog]="blog" />
+  </div>
+
+</ng-container>
