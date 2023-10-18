@@ -11,6 +11,7 @@ import { BlogPreviewComponent } from './components/blog-preview/blog-preview.com
 import { BlogViewComponent } from './components/blog-view/blog-view.component';
 import { HttpClient } from '@angular/common/http';
 import { ApiMockService } from 'src/app/services/api-mock.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,7 @@ import { ApiMockService } from 'src/app/services/api-mock.service';
     WebRoutingModule,
     MaterialModule,
     CoreModule,
-  ],
-  providers: [
-    {
-      provide: HttpClient,
-      useClass: ApiMockService,
-    }
+    ReactiveFormsModule,
   ]
 })
 export class WebModule { }

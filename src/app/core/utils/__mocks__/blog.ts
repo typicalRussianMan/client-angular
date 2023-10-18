@@ -10,7 +10,7 @@ const FAKE_BLOGS: readonly BlogDto[] = new Array(BLOGS_COUNT)
   .map(() => ({
     userName: fakeUserName(),
     content: faker.lorem.paragraphs(),
-    createdAt: DateTime.now().toISOTime() ?? '',
+    createdAt: DateTime.fromJSDate(faker.date.recent({ days: 10 })).toISO() ?? '',
     id: faker.number.int(100),
     rubric: faker.word.adjective(),
     tags: faker.word.words(5).split(' ').map(e => ({ name: e, id: faker.number.int(1000) })),

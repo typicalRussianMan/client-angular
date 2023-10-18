@@ -19,7 +19,7 @@ export function CrudService<
 
   return class {
 
-    private readonly routeUrl: URL;
+    protected readonly routeUrl: URL;
 
     private readonly routeUrlWithId = (id: any) => `${this.routeUrl}/${id}`;
 
@@ -27,10 +27,7 @@ export function CrudService<
 
     private readonly appConfig = inject(AppConfigService);
 
-    private readonly http = inject(this.appConfig.isMockMode
-      ? ApiMockService
-      : HttpClient
-    );
+    private readonly http = inject(ApiMockService);
 
     public constructor() {
       this.routeUrl = new URL(route, this.appConfig.apiUrl);

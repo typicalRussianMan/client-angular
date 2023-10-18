@@ -19,7 +19,7 @@
     <span *ngFor="let tag of blog.tags" class="tag">#{{ tag.name }}</span>
   </div>
 
-  <div class="blog__content">{{ blog.content }}</div>
+  <div #content class="blog__content">{{ blog.content }}</div>
 
 </div>
 

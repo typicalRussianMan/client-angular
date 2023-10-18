@@ -40,13 +40,12 @@ export class UserService {
     private readonly appErrorMapper: AppErrorMapper,
     config: AppConfigService,
     apiMock: ApiMockService,
-    httpClient: HttpClient,
-    ) {
+  ) {
     this.loginUrl = new URL('auth/login', config.apiUrl);
     this.verifyTokenUrl = new URL('auth/token/verify', config.apiUrl);
     this.userUrl = new URL('auth/user', config.apiUrl);
 
-    this.http = config.isMockMode ? apiMock : httpClient;
+    this.http = apiMock;
 
     this.currentUser$ = this.initCurrentUser();
   }

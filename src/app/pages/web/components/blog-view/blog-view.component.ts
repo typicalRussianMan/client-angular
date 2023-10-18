@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -36,4 +36,5 @@ export class BlogViewComponent implements OnInit {
   protected createdAt(dateTime: DateTime): string {
     return dateTime.toFormat('DD \' at \' T');
   }
+
 }

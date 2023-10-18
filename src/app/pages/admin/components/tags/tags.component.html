@@ -2,15 +2,8 @@
 
 <ng-container *ngIf="tags$ | async as tags; else loading">
 
-  <div *ngIf="tags.length > 0; else noTags">
-
-    <ng-container *ngFor="let tag of tags">
-
-      <mat-divider />
-      <div class="tag">{{ tag.name }}</div>
-
-    </ng-container>
-
+  <div class="container" *ngIf="tags.length > 0; else noTags">
+    <span *ngFor="let tag of tags" class="tag">#{{ tag.name }}</span>
   </div>
 </ng-container>
 

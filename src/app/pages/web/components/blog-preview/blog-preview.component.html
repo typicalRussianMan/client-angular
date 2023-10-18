@@ -11,7 +11,12 @@
       </div>
     </div>
     <h2 class="blog__title">{{ blog.title }}</h2>
-    <span>Rubric: {{ blog.rubric }}</span>
+    <span
+      *ngIf="blog.rubric as rubric"
+      class="rubric"
+      (click)="onRubricClick(blog.rubric)">
+      Rubric: {{ blog.rubric }}
+    </span>
   </div>
 
   <div class="blog__content">
@@ -19,7 +24,12 @@
   </div>
 
   <div class="blog__footer">
-    <span *ngFor="let tag of blog.tags" class="tag">#{{ tag.name }}</span>
+    <span
+      *ngFor="let tag of blog.tags"
+      (click)="onTagClick(tag.name)"
+      class="tag">
+      #{{ tag.name }}
+    </span>
   </div>
 
   <a

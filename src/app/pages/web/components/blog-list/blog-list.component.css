@@ -29,9 +29,18 @@
   flex-wrap: wrap;
 }
 
-.tag {
-  padding: 3px;
-  color: #fff;
-  background-color: #2a92d8cc;
-  border-radius: 3px;
+.controls {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.pagination {
+  gap: 10px;
 }

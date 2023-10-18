@@ -1,2 +1,36 @@
+<div class="controls">
+  <div class="row pagination">
+    <button [disabled]="form.getRawValue().offset === 0" (click)="handlePrev()" mat-button><</button>
+    <span>{{ fromTo$ | async }}</span>
+    <button [disabled]="isDisabled$ | async" (click)="handleNext()" mat-button>></button>
+  </div>
+  <form class="filters" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Rubric</mat-label>
+      <mat-select formControlName="rubric">
+        <mat-option [value]="null">Not selected</mat-option>
+        <mat-option *ngFor="let rubric of rubrics$ | async" [value]="rubric.name">
+          {{ rubric.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-<app-blog-preview *ngFor="let blog of blogs$ | async" [blog]="blog" />
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <mat-select formControlName="tag">
+        <mat-option [value]="null">Not selected</mat-option>
+        <mat-option *ngFor="let tag of tags$ | async" [value]="tag.name">
+          {{ tag.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<mat-card class="filters">
+</mat-card>
+<app-blog-preview
+  (tagClick)="updateTag($event)"
+  (rubricClick)="updateRubric($event)"
+  *ngFor="let blog of blogs$ | async"
+  [blog]="blog" />
+

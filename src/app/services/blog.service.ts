@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 import { Blog, BlogToCreate } from '../core/models/blog/blog';
 import { BlogMapper } from '../core/models/blog/blog.mapper';
 import { BlogDto } from '../core/models/blog/blog.dto';
 import { CrudService } from '../core/utils/crud-service';
-
+import { ApiMockService } from './api-mock.service';
+interface Query {
+  offset: number;
+  limit: number;
+  rubric: string | null;
+  tag: string | null;
+}
 @Injectable({ providedIn: 'root' })
 export class BlogService extends CrudService<BlogDto, BlogToCreate>('blogs') {
+
+  private httpClient = inject(ApiMockService);
 
   public constructor(
     private readonly blogMapper: BlogMapper,
@@ -16,11 +24,18 @@ export class BlogService extends CrudService<BlogDto, BlogToCreate>('blogs') {
   }
 
   /** Gets all blogs. */
-  public getBlogs(): Observable<readonly Blog[]> {
-    return this.getAll()
+  public getBlogs(query: Partial<Query>): Observable<readonly Blog[]> {
+    const params = new URLSearchParams(query as Record<any, any>);
+    return this.httpClient.get<readonly BlogDto[]>(`${this.routeUrl.toString()}?${params}`)
       .pipe(
-        map(blogs => blogs.map(blog => this.blogMapper.fromDto(blog))),
+        map((blogs: BlogDto[]) => blogs.map(blog => this.blogMapper.fromDto(blog))),
       );
+  }
+
+  public blogsLength(): Observable<number> {
+    return this.getBlogs({ limit: 1000 }).pipe(
+      map(e => e.length),
+    );
   }
 
   /**

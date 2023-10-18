@@ -28,10 +28,3 @@
   gap: 5px;
   flex-wrap: wrap;
 }
-
-.tag {
-  padding: 3px;
-  color: #fff;
-  background-color: #2a92d8cc;
-  border-radius: 3px;
-}
