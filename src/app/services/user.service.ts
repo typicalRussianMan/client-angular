@@ -16,7 +16,7 @@ import { UserMapper } from '../core/models/user/user.mapper';
 import { AppErrorMapper } from '../core/models/app-error/app-error.mapper';
 
 import { AppConfigService } from './app-config.service';
-import { AppError } from '../core/models/app-error/app-error';
+import { ApiMockService } from './api-mock.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -29,19 +29,23 @@ export class UserService {
 
   private readonly userUrl: URL;
 
+  private readonly http: HttpClient;
+
   public constructor(
     private readonly router: Router,
-    private readonly http: HttpClient,
     private readonly loginMapper: LoginMapper,
     private readonly tokenMapper: TokenMapper,
     private readonly tokenService: TokenService,
     private readonly userMapper: UserMapper,
     private readonly appErrorMapper: AppErrorMapper,
     config: AppConfigService,
+    apiMock: ApiMockService,
   ) {
     this.loginUrl = new URL('auth/login', config.apiUrl);
     this.verifyTokenUrl = new URL('auth/token/verify', config.apiUrl);
     this.userUrl = new URL('auth/user', config.apiUrl);
+
+    this.http = apiMock;
 
     this.currentUser$ = this.initCurrentUser();
   }
@@ -63,7 +67,6 @@ export class UserService {
       .pipe(
         map(this.userMapper.fromDto),
         catchError(e => {
-          this.logout();
           return of(null);
         }),
       );

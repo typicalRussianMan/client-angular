@@ -4,18 +4,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.auth-container {
-  width: 30%;
-}
-
-.title {
-  font-size: var(--font-size-l);
-  margin-bottom: 10px;
-}
-
-.submit-button {
-  width: 100%;
-  margin-bottom: 10px;
-}
-

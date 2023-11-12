@@ -32,7 +32,9 @@ export class BlogsComponent {
     private readonly userService: UserService,
   ) {
     this.blogs$ = this.updateBlogEffect$.pipe(
-      switchMap(() => blogService.getBlogs()),
+      switchMap(() => blogService.getBlogs({
+        limit: 1000,
+      })),
       catchError((e: AppError) => {
         this.notificationService.showAppError(e);
         this.userService.logout();

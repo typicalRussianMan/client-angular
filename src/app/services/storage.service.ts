@@ -29,4 +29,8 @@ export class StorageService {
   public removeItem(key: string): void {
     localStorage.removeItem(key);
   }
+
+  public hasItem(key: string): boolean {
+    return localStorage.getItem(key) !== null;
+  }
 }

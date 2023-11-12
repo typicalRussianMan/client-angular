@@ -1,0 +1,46 @@
+.icon {
+  transform: scale(1.5);
+}
+
+.blog {
+  margin-block: 10px;
+}
+
+.blog__author {
+  font-weight: 700;
+}
+
+.blog__created {
+  color: #777;
+}
+
+.blog__title {
+  font-size: var(--font-size-xl);
+  margin: 0;
+}
+
+.blog__content {
+  margin-top: 5px;
+}
+
+.blog__footer {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+
+.pagination {
+  gap: 10px;
+}
